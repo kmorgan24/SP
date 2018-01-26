@@ -1,0 +1,53 @@
+﻿<Window x:Class="ShopManager.CreateAppointmentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShopManager"
+        mc:Ignorable="d"
+        Title="CreateAppointmentWindow" Height="700" Width="700"
+        Closing="Window_Closing"
+        >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="TopGrid" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            
+        </Grid>
+        <Grid Name="MidGrid" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <Label Name="labelLaborItems" Content="Labor Items" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+            <Button Name="AddLaborItemBtn" Content="+" VerticalAlignment="Stretch" HorizontalAlignment="Right" MinWidth="25"/>
+            <ScrollViewer Grid.Row="1">
+                <StackPanel Name="LaborItemsListBox">
+                    
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Grid Name="BottomGrid" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <Label Name="labelNotes" Content="Notes" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+            <Button Name="AddNotesBtn" Content="+" VerticalAlignment="Stretch" HorizontalAlignment="Right" MinWidth="25" Click="AddNotesBtn_Click"/>
+            <ScrollViewer Grid.Row="1">
+                <StackPanel Name="NotesListBox">
+
+                </StackPanel>
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
+</Window>

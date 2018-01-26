@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using ShopManagerClasses;
 
 namespace Server
 {
@@ -13,5 +14,8 @@ namespace Server
     {
         [OperationContract]
         void DoWork();
+
+        [OperationContract]
+        bool CreateAppointment(int customerID, int carID, DateTime date, int hours, List<string> notes, List<LaborItem> labor);
     }
 }

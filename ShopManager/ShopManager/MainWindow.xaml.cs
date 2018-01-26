@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Server;
 
 namespace ShopManager
 {
@@ -21,13 +22,28 @@ namespace ShopManager
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static IManagerService Server;
+        public static IManagerService AppServer;
         private static ChannelFactory<IManagerService> _channel;
         public MainWindow()
         {
             InitializeComponent();
-            _channel = new ChannelFactory<IManagerService>("ManagerEndpoint");
-            Server = _channel.CreateChannel();
+            try
+            {
+                _channel = new ChannelFactory<IManagerService>("ManagerEndpoint");
+                AppServer = _channel.CreateChannel();
+            }
+            catch (Exception)
+            {
+                //throw new InvalidOperationException();
+            
+            }
+            BottomGrid.Children.Add(new SingleView());
+        }
+
+        private void btnCreateNew_Click(object sender, RoutedEventArgs e)
+        {
+            Window w = new CreateAppointmentWindow(AppServer);
+            w.ShowDialog();
         }
     }
 }

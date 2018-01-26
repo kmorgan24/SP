@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,9 +21,30 @@ namespace Server
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ManagerService _server;
         public MainWindow()
         {
+            try
+            {
+                startService();
+            }
+            catch (Exception)
+            {
+
+               
+            }
+            
             InitializeComponent();
+            
+
+        }
+        private void startService()
+        {
+            _server = new ManagerService();
+            ServiceHost host = new ServiceHost(_server);
+            
+            host.Open();
+            
         }
     }
 }
