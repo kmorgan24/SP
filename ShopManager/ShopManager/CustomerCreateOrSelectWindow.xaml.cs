@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopManagerClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,25 +12,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ShopManagerClasses;
-
 namespace ShopManager
 {
     /// <summary>
-    /// Interaction logic for AddLaborItemWindow.xaml
+    /// Interaction logic for CustomerCreateOrSelectWindow.xaml
     /// </summary>
-    public partial class AddLaborItemWindow : Window
+    public partial class CustomerCreateOrSelectWindow : Window
     {
-        private List<LaborItem> _labor;
-
-        public AddLaborItemWindow()
+        private Customer _customer;
+        public CustomerCreateOrSelectWindow(Customer cust)
         {
+            _customer = cust;
             InitializeComponent();
-        }
-
-        public AddLaborItemWindow(List<LaborItem> _labor)
-        {
-            this._labor = _labor;
+            //MainWindow.AppServer.DoWork(); // does nothing 
+            
         }
     }
 }

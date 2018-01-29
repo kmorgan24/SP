@@ -42,7 +42,7 @@ namespace ShopManager
 
         private void btnCreateNew_Click(object sender, RoutedEventArgs e)
         {
-            Window w = new CreateAppointmentWindow(AppServer);
+            Window w = new CreateAppointmentWindow();
             w.ShowDialog();
         }
     }

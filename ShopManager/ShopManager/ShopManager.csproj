@@ -81,13 +81,48 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddLaborItemWindow.xaml.cs">
+      <DependentUpon>AddLaborItemWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentDisplay.xaml.cs">
+      <DependentUpon>AppointmentDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateAppointmentWindow.xaml.cs">
       <DependentUpon>CreateAppointmentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerCreateOrSelectWindow.xaml.cs">
+      <DependentUpon>CustomerCreateOrSelectWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DayView.xaml.cs">
+      <DependentUpon>DayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LaborItemView.xaml.cs">
+      <DependentUpon>LaborItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="SingleView.xaml.cs">
       <DependentUpon>SingleView.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddLaborItemWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AppointmentDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CreateAppointmentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CustomerCreateOrSelectWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LaborItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

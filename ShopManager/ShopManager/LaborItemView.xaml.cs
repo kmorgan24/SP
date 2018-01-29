@@ -10,26 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ShopManagerClasses;
 
 namespace ShopManager
 {
     /// <summary>
-    /// Interaction logic for AddLaborItemWindow.xaml
+    /// Interaction logic for LaborItemView.xaml
     /// </summary>
-    public partial class AddLaborItemWindow : Window
+    public partial class LaborItemView : UserControl
     {
-        private List<LaborItem> _labor;
+        private LaborItem item;
 
-        public AddLaborItemWindow()
+        public LaborItemView()
         {
             InitializeComponent();
         }
 
-        public AddLaborItemWindow(List<LaborItem> _labor)
+        public LaborItemView(LaborItem item)
         {
-            this._labor = _labor;
+            this.item = item;
         }
     }
 }

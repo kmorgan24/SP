@@ -18,9 +18,21 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            
-            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Name="AddCustomerBtn" Content="+" VerticalAlignment="Stretch" HorizontalAlignment="Right" MinWidth="25" Grid.Column="3" Click="AddCustomerBtn_Click"/>
+            <Label Content="Customer Info"/>
+            <Label Content="Name:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right"/>
+            <Label Name="CustomerName" Content="" Grid.Column="1" Grid.Row="1"/>
+            <Label Content="Car:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right"/>
+            <Label Name="CarInfo" Content="" Grid.Column="1" Grid.Row="2"/>
         </Grid>
         <Grid Name="MidGrid" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -28,7 +40,7 @@
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
             <Label Name="labelLaborItems" Content="Labor Items" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
-            <Button Name="AddLaborItemBtn" Content="+" VerticalAlignment="Stretch" HorizontalAlignment="Right" MinWidth="25"/>
+            <Button Name="AddLaborItemBtn" Content="+" VerticalAlignment="Stretch" HorizontalAlignment="Right" MinWidth="25" Click="AddLaborItemBtn_Click"/>
             <ScrollViewer Grid.Row="1">
                 <StackPanel Name="LaborItemsListBox">
                     

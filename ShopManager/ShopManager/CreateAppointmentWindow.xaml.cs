@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ShopManagerClasses;
-using Server;
+
 
 namespace ShopManager
 {
@@ -23,13 +23,13 @@ namespace ShopManager
     {
         private List<string> _notes;
         private List<LaborItem> _labor;
-        IManagerService AppServer;
-        public CreateAppointmentWindow(IManagerService server)
+        private Customer _customer;
+        public CreateAppointmentWindow()
         {
             InitializeComponent();
-            AppServer = server;
             _notes = new List<string>();
             _labor = new List<LaborItem>();
+            _customer = new Customer();
         }
         
 
@@ -48,8 +48,33 @@ namespace ShopManager
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //confirm intent if save then...
             // create the appointment and put into the DB
-            //AppServer.CreateAppointment();
+            //MainWindow.AppServer.CreateAppointment();
+        }
+
+        private void AddLaborItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window win = new AddLaborItemWindow(_labor);
+            win.ShowDialog();
+            UpdateUI();     //that seems to work as intended for now (ChangeLater)
+        }
+
+        private void AddCustomerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window win = new CustomerCreateOrSelectWindow(_customer);
+            win.ShowDialog();
+            // this code waits for the dialog to close brfore continuing so it is safe to update display here
+            // add code to display customer
+
+        }
+        private void UpdateUI()
+        {
+            LaborItemsListBox.Children.Clear();
+            foreach (LaborItem item in _labor)
+            {
+                LaborItemsListBox.Children.Add(new LaborItemView(item));
+            }
         }
     }
 }
