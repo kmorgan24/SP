@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ShopManagerClasses
 {
-    class WorkOrder
+    public class WorkOrder
     {
+
+        public long Id { get; set; }
+        public long AppointmentID { get; set; }
+        public long TechnicianID { get; set; }
     }
 }

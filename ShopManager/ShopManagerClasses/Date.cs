@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ShopManagerClasses
 {
-    class Date
+    public class Date
     {
+        public long Id { get; set; }
+        public long AppointmentID { get; set; }
+        public string Date1 { get; set; }
+        public long Hours { get; set; }
     }
 }

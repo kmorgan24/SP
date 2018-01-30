@@ -51,15 +51,21 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="9*"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Name="labelNotes" Content="Notes" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
-            <Button Name="AddNotesBtn" Content="+" VerticalAlignment="Stretch" HorizontalAlignment="Right" MinWidth="25" Click="AddNotesBtn_Click"/>
-            <ScrollViewer Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Name="labelNotes" Content="Notes" VerticalAlignment="Stretch" HorizontalAlignment="Left" Grid.ColumnSpan="2"/>
+            <Button Name="AddNotesBtn" Content="+" VerticalAlignment="Stretch" HorizontalAlignment="Right" MinWidth="25" Grid.ColumnSpan="2" Click="AddNotesBtn_Click"/>
+            <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2">
                 <StackPanel Name="NotesListBox">
 
                 </StackPanel>
             </ScrollViewer>
-
+            <Button Name="Savebtn" Content="Save" Grid.Column="1" Grid.Row="2" Margin="20,0,0,0" Width="50" HorizontalAlignment="Left" Click="Savebtn_Click"/>
+            <Button Name="Cancelbtn" Content="Cancel" Grid.Column="0" Grid.Row="2" Margin="0,0,20,0" Width="50" HorizontalAlignment="Right" Click="Cancelbtn_Click"/>
         </Grid>
     </Grid>
 </Window>

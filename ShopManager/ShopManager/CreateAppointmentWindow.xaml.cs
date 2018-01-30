@@ -24,12 +24,17 @@ namespace ShopManager
         private List<string> _notes;
         private List<LaborItem> _labor;
         private Customer _customer;
+        private Car _car;
+        private List<Date> _dates;
+
         public CreateAppointmentWindow()
         {
             InitializeComponent();
             _notes = new List<string>();
             _labor = new List<LaborItem>();
             _customer = new Customer();
+            _car = new Car();
+            _dates = new List<Date>();
         }
         
 
@@ -62,11 +67,12 @@ namespace ShopManager
 
         private void AddCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Window win = new CustomerCreateOrSelectWindow(_customer);
+            Window win = new CustomerCreateOrSelectWindow(_customer, _car);
             win.ShowDialog();
             // this code waits for the dialog to close brfore continuing so it is safe to update display here
             // add code to display customer
-
+            CustomerName.Content = _customer.FName + " " + _customer.LName;
+            CarInfo.Content = _car.Year + " " + _car.Make + " " + _car.Model;
         }
         private void UpdateUI()
         {
@@ -75,6 +81,27 @@ namespace ShopManager
             {
                 LaborItemsListBox.Children.Add(new LaborItemView(item));
             }
+        }
+
+        private void Cancelbtn_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Savebtn_Click(object sender, RoutedEventArgs e)
+        {
+            Appointment a = new Appointment(_customer, _car, _labor, _notes, _dates );
+            //Send to server
+            try
+            {
+                MainWindow.AppServer.CreateAppointmentFromClass(a);
+            }
+            catch (Exception)
+            {
+
+            }
+            
+            this.Close();
         }
     }
 }

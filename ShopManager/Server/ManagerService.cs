@@ -18,6 +18,11 @@ namespace Server
             throw new NotImplementedException();
         }
 
+        public void CreateAppointmentFromClass(ShopManagerClasses.Appointment a)
+        {
+            throw new NotImplementedException();
+        }
+
         public void DoWork()
         {
         }

@@ -63,10 +63,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.cs" />
     <Compile Include="Appointment.cs" />
+    <Compile Include="Car.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="Date.cs" />
     <Compile Include="LaborItem.cs" />
+    <Compile Include="Note.cs" />
+    <Compile Include="Part.cs" />
+    <Compile Include="PhoneNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recommendation.cs" />
+    <Compile Include="ServiceAdvisor.cs" />
+    <Compile Include="Technician.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="WorkOrder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

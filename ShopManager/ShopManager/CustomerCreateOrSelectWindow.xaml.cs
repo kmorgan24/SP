@@ -20,9 +20,11 @@ namespace ShopManager
     public partial class CustomerCreateOrSelectWindow : Window
     {
         private Customer _customer;
-        public CustomerCreateOrSelectWindow(Customer cust)
+        private Car _car;
+        public CustomerCreateOrSelectWindow(Customer cust, Car car)
         {
             _customer = cust;
+            _car = car;
             InitializeComponent();
             //MainWindow.AppServer.DoWork(); // does nothing 
             

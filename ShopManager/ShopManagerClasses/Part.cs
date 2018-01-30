@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace ShopManagerClasses
 {
-    class Part
+    public class Part
     {
+        public long Id { get; set; }
+        public string PartNumber { get; set; }
+        public string PartName { get; set; }
+        public string PartDescription { get; set; }
+        public long InStock { get; set; }
+        public string Supplier { get; set; }
+        public long WorkOrderID { get; set; }
     }
 }

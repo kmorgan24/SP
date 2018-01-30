@@ -17,5 +17,7 @@ namespace Server
 
         [OperationContract]
         bool CreateAppointment(int customerID, int carID, DateTime date, int hours, List<string> notes, List<LaborItem> labor);
+        [OperationContract]
+        void CreateAppointmentFromClass(ShopManagerClasses.Appointment a);
     }
 }

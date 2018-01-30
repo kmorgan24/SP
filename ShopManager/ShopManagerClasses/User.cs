@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace ShopManagerClasses
 {
-    interface User
+    public interface User
     {
+        long Id { get; set; }
+        string Name { get; set; }
+        string LoginName { get; set; }
+        string Password { get; set; }
+        long LoggedIn { get; set; }
+        long Active { get; set; }
     }
 }

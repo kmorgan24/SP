@@ -8,5 +8,10 @@ namespace ShopManagerClasses
 {
     public class Customer
     {
+        public long Id { get; set; }
+        public string FName { get; set; }
+        public string LName { get; set; }
+        public Nullable<long> SpouseID { get; set; }
+        public string CompanyName { get; set; }
     }
 }

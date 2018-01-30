@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ShopManagerClasses
 {
-    class Recommendation
+    public class Recommendation
     {
+        public long Id { get; set; }
+        public string Description { get; set; }
+        public long Active { get; set; }
     }
 }
