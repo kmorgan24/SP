@@ -10,8 +10,9 @@ namespace ShopManagerClasses
     {
         public long Id { get; set; }
         public long AppointmentID { get; set; }
-        public long Hours { get; set; }
+        public double Hours { get; set; }
         public string Description { get; set; }
         public bool Complete { get; set; }
+        public string LongDescription { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace Server
     public interface IManagerService
     {
         [OperationContract]
-        void DoWork();
+        bool DoWork();
 
         [OperationContract]
         bool CreateAppointment(int customerID, int carID, DateTime date, int hours, List<string> notes, List<LaborItem> labor);

@@ -34,9 +34,10 @@ namespace ShopManager
             }
             catch (Exception)
             {
-                //throw new InvalidOperationException();
+                throw new InvalidOperationException();
             
             }
+
             BottomGrid.Children.Add(new SingleView());
         }
 

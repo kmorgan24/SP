@@ -23,8 +23,9 @@ namespace Server
             throw new NotImplementedException();
         }
 
-        public void DoWork()
+        public bool DoWork()
         {
+            return true;
         }
     }
 }

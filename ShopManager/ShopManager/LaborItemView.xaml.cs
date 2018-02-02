@@ -31,6 +31,7 @@ namespace ShopManager
         public LaborItemView(LaborItem item)
         {
             this.item = item;
+
         }
     }
 }

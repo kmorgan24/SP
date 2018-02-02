@@ -10,9 +10,8 @@ namespace ShopManagerClasses
     {
 
         public long Id { get; }
-        public long CustomerID { get; set; }
-        public long CarID { get; set; }
-        public string ProblemDescription { get; set; }
+
+        //public string ProblemDescription { get; set; } dont know where this came from probably dont need it
 
         // this class will need some data changes in order to work
         public List<Note> Notes;
@@ -20,17 +19,22 @@ namespace ShopManagerClasses
         public List<Date> Dates;
         private Customer _customer;
         private Car _car;
-        private List<LaborItem> _labor;
-        private List<string> _notes;
-        private List<Date> _dates;
+        
+        
+        // a date has the number of hours that will be taken up inside of it
+        public Appointment()
+        {
+
+        }
 
         public Appointment(Customer _customer, Car _car, List<LaborItem> _labor, List<string> _notes, List<Date> _dates)
         {
             this._customer = _customer;
             this._car = _car;
-            this._labor = _labor;
-            this._notes = _notes;
-            this._dates = _dates;
+            Labor = _labor;
+            
+            Dates = _dates;
+            // construct a list of notes from the string list notes
         }
     }
 }

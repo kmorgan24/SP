@@ -21,15 +21,41 @@ namespace ShopManager
     public partial class AddLaborItemWindow : Window
     {
         private List<LaborItem> _labor;
-
-        public AddLaborItemWindow()
-        {
-            InitializeComponent();
-        }
+        private List<int> HoursList;
 
         public AddLaborItemWindow(List<LaborItem> _labor)
         {
+            InitializeComponent();
+            HoursList = new List<int>();
             this._labor = _labor;
+            
+            for (int i = 0; i < 75; i++)
+            {
+                HoursList.Add(i);
+            }
+            listBox.ItemsSource = HoursList;
+        }
+
+        private void textBoxHours_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            LaborItem l = new LaborItem();
+            l.Description = textShortDescription.Text;
+            l.LongDescription = textBoxLongDescription.Text;
+           // double decVal = double.Parse((string)listBox2.SelectedValue);
+            //double temp = (int)listBox.SelectedValue + decVal;
+            l.Hours = (int)listBox.SelectedValue;
+            _labor.Add(l);
+            Close();
         }
     }
 }
