@@ -22,8 +22,22 @@ namespace ShopManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        public enum CurrentViewTypes
+        {
+            Single,
+            Day,
+            Week
+        }
         public static IManagerService AppServer;
         private static ChannelFactory<IManagerService> _channel;
+
+        public static long IDOfSelectedAppointment;
+        public static CurrentViewTypes CurrentView;
+        public static DateTime CurrentWorkingDate;
+
+        public static SolidColorBrush SelectedBackground = Brushes.AliceBlue;
+        public static SolidColorBrush NotSelectedBackground = Brushes.Gray;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,13 +52,47 @@ namespace ShopManager
             
             }
 
-            BottomGrid.Children.Add(new SingleView());
+            IDOfSelectedAppointment = 0;
+            CurrentView = CurrentViewTypes.Day;
+            CurrentWorkingDate = DateTime.Now;
+            List<ShopManagerClasses.Appointment> AppointmentList = new List<ShopManagerClasses.Appointment>();
+            try
+            {
+                AppointmentList =  AppServer.GetAppointments(CurrentWorkingDate);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            BottomGrid.Children.Add(new DayView(AppointmentList, CurrentWorkingDate));
         }
 
         private void btnCreateNew_Click(object sender, RoutedEventArgs e)
         {
             Window w = new CreateAppointmentWindow();
             w.ShowDialog();
+        }
+
+        private void btnSingleView_Click(object sender, RoutedEventArgs e)
+        {
+            btnDayView.Background = NotSelectedBackground;
+            btnSingleView.Background = SelectedBackground;
+            btnWeekView.Background = NotSelectedBackground;
+        }
+
+        private void btnDayView_Click(object sender, RoutedEventArgs e)
+        {
+            btnDayView.Background = SelectedBackground;
+            btnSingleView.Background = NotSelectedBackground;
+            btnWeekView.Background = NotSelectedBackground;
+        }
+
+        private void btnWeekView_Click(object sender, RoutedEventArgs e)
+        {
+            btnDayView.Background = NotSelectedBackground;
+            btnSingleView.Background = NotSelectedBackground;
+            btnWeekView.Background = SelectedBackground;
         }
     }
 }

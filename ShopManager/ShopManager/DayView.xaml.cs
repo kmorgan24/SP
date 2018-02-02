@@ -21,12 +21,14 @@ namespace ShopManager
     /// </summary>
     public partial class DayView : UserControl
     {
-        public DayView(List<Appointment> data)
+        private DateTime displayedDate;
+        public DayView(List<Appointment> data, DateTime day)
         {
             InitializeComponent();
+            displayedDate = day;
             foreach (Appointment item in data)
             {
-                AppointmentStack.Children.Add(new AppointmentDisplay(item));
+                AppointmentStack.Children.Add(new AppointmentDisplay(item, displayedDate));
             }
             
         }

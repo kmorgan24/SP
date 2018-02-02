@@ -9,7 +9,7 @@ namespace ShopManagerClasses
     public class Appointment
     {
 
-        public long Id { get; }
+        public long Id { get; set; }
 
         //public string ProblemDescription { get; set; } dont know where this came from probably dont need it
 

@@ -42,9 +42,9 @@
                     Inner Thing
                 </MenuItem>
             </Menu>
-            <Button Name="btnSingleView" Content="Single" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <Button Name="btnDayView" Content="Day" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-            <Button Name="btnWeekView" Content="Week" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Button Name="btnSingleView" Content="Single" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnSingleView_Click"/>
+            <Button Name="btnDayView" Content="Day" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnDayView_Click"/>
+            <Button Name="btnWeekView" Content="Week" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnWeekView_Click"/>
 
             <Button Name="btnCreateNew" Content="New Appointment" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnCreateNew_Click"/>
             <Button Name="btnConvertToOrder" Content="Convert to Order" Grid.Column="5" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

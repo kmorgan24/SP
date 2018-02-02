@@ -125,5 +125,56 @@ namespace Server
         {
             return true;
         }
+
+        public List<ShopManagerClasses.Appointment> GetAppointments(DateTime day)
+        {
+            List<ShopManagerClasses.Appointment> apps = new List<ShopManagerClasses.Appointment>();
+            using (var db = new mainEntities())
+            {
+                // select from dates table any dates that match
+                var tempApps =
+                    from d in db.Dates
+                    where d.Date1 == day.ToString()
+                    select d;
+
+                foreach (var item in tempApps)
+                {
+                    var temp = new ShopManagerClasses.Appointment();
+                    temp.Id = item.AppointmentID;
+                    // select the list of dates with matching appointment ids
+                    List<ShopManagerClasses.Date> dates = new List<ShopManagerClasses.Date>();
+                    var tempDates =
+                        from d in db.Dates
+                        where d.AppointmentID == item.AppointmentID
+                        select d;
+                    foreach (var tempdateitem in tempDates)
+                    {
+                        var tempSDate = new ShopManagerClasses.Date();
+                        tempSDate.AppointmentID = tempdateitem.AppointmentID;
+                        tempSDate.Date1 = tempdateitem.Date1;
+                        tempSDate.Hours = tempdateitem.Hours;
+                        tempSDate.Id = tempdateitem.Id;
+                        dates.Add(tempSDate);
+                    }
+                   temp.Dates = dates;
+                   // select the list of labor items with matching appointment ids
+                   //temp.Labor;
+                   // select the list of notes with matching ids
+                   //temp.Notes
+                   // select the car that is associated
+                   //temp._car
+                   // select the customer that is associated
+                   //temp._customer
+
+                   apps.Add(temp);
+                }
+
+                
+
+            }
+
+
+            return apps;
+        }
     }
 }

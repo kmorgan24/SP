@@ -28,9 +28,21 @@ namespace ShopManager
             InitializeComponent();
         }
 
-        public AppointmentDisplay(Appointment item)
+        public AppointmentDisplay(Appointment item, DateTime dispDay)
         {
+            InitializeComponent();
             this.item = item;
+            CustomerName.Content = item._customer.FName + " " + item._customer.LName;
+            Car.Content = item._car.Year + " " + item._car.Make + " " + item._car.Model;
+            double hours = 0;
+            foreach (var day in item.Dates)
+            {
+                if (day.Date1 == dispDay.ToString())
+                {
+                    hours += day.Hours;
+                }
+            }
+            Hours.Content = hours.ToString();
         }
     }
 }
