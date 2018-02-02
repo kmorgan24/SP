@@ -12,7 +12,10 @@ namespace Server
     [ServiceContract]
     public interface IManagerService
     {
+
+
         [OperationContract]
+
         bool DoWork();
 
         [OperationContract]

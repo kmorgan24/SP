@@ -17,8 +17,8 @@ namespace ShopManagerClasses
         public List<Note> Notes;
         public List<LaborItem> Labor;
         public List<Date> Dates;
-        private Customer _customer;
-        private Car _car;
+        public Customer _customer;
+        public Car _car;
         
         
         // a date has the number of hours that will be taken up inside of it
