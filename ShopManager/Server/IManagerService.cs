@@ -15,15 +15,27 @@ namespace Server
 
 
         [OperationContract]
-
         bool DoWork();
 
         [OperationContract]
         bool CreateAppointment(int customerID, int carID, DateTime date, int hours, List<string> notes, List<LaborItem> labor);
+
         [OperationContract]
         void CreateAppointmentFromClass(ShopManagerClasses.Appointment a);
 
         [OperationContract]
         List<ShopManagerClasses.Appointment> GetAppointments(DateTime start);
+
+        [OperationContract]
+        List<ShopManagerClasses.Customer> SearchCustomerByCompanyName(string text);
+
+        [OperationContract]
+        List<ShopManagerClasses.Customer> SearchCustomerByPhoneNumber(string text);
+
+        [OperationContract]
+        List<ShopManagerClasses.Customer> SearchCustomerByLastName(string text);
+
+        [OperationContract]
+        List<ShopManagerClasses.Customer> SearchCustomerByFirstName(string text);
     }
 }

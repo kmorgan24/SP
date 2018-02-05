@@ -57,6 +57,7 @@ namespace Server
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// use this function to create the appointment from an assembled appointment class
         /// </summary>
@@ -127,6 +128,11 @@ namespace Server
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="day"></param>
+        /// <returns></returns>
         public List<ShopManagerClasses.Appointment> GetAppointments(DateTime day)
         {
             List<ShopManagerClasses.Appointment> apps = new List<ShopManagerClasses.Appointment>();
@@ -245,7 +251,7 @@ namespace Server
                 }
 
 
-                
+
 
 
 
@@ -255,9 +261,130 @@ namespace Server
             return apps;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public List<ShopManagerClasses.Customer> SearchCustomerByCompanyName(string text)
+        {
+            List<ShopManagerClasses.Customer> results = new List<ShopManagerClasses.Customer>();
+            using (var db = new mainEntities())
+            {
+                try
+                {
+                    var cust =
+                        from c in db.Customers
+                        where c.CompanyName == text
+                        select c;
+                    foreach (var item in cust)
+                    {
+                        ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                return results;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public List<ShopManagerClasses.Customer> SearchCustomerByFirstName(string text)
+        {
+            List<ShopManagerClasses.Customer> results = new List<ShopManagerClasses.Customer>();
+            using (var db = new mainEntities())
+            {
+                try
+                {
+                    var cust =
+                        from c in db.Customers
+                        where c.FName == text
+                        select c;
+                    foreach (var item in cust)
+                    {
+                        ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                return results;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public List<ShopManagerClasses.Customer> SearchCustomerByLastName(string text)
+        {
+            List<ShopManagerClasses.Customer> results = new List<ShopManagerClasses.Customer>();
+            using (var db = new mainEntities())
+            {
+                try
+                {
+                    var cust =
+                        from c in db.Customers
+                        where c.LName == text
+                        select c;
+                    foreach (var item in cust)
+                    {
+                        ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+                return results;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public List<ShopManagerClasses.Customer> SearchCustomerByPhoneNumber(string text)
+        {
+            List<ShopManagerClasses.Customer> results = new List<ShopManagerClasses.Customer>();
+            using (var db = new mainEntities())
+            {
+                try
+                {
+                    var phone =
+                        from p in db.PhoneNumbers
+                        where p.Number == text
+                        select p;
+                    foreach (var result in phone)
+                    {
+                        var cust =
+                            from c in db.Customers
+                            where c.Id == result.CustomerID
+                            select c;
+                        foreach (var item in cust)
+                        {
+                            ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
+                            results.Add(temp);
+                        }
+                    }
 
 
+                }
+                catch (Exception)
+                {
 
-
+                }
+                return results;
+            }
+        }
     }
 }
