@@ -20,8 +20,8 @@
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Name="btnBack" Content="-" Grid.Row="0" MinWidth="50" MaxWidth="75" HorizontalAlignment="Left"/>
-        <Button Name="btnFoward" Content="+" Grid.Row="0" Grid.Column="1" MinWidth="50" MaxWidth="75" HorizontalAlignment="Right"/>
+        <Button Name="btnBack" Content="-" Grid.Row="0" MinWidth="50" MaxWidth="75" HorizontalAlignment="Left" Click="btnBack_Click"/>
+        <Button Name="btnFoward" Content="+" Grid.Row="0" Grid.Column="1" MinWidth="50" MaxWidth="75" HorizontalAlignment="Right" Click="btnFoward_Click"/>
         <Label x:Name="label" Content="Name:" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="Phone:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label x:Name="label2" Content="Year:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>

@@ -24,5 +24,15 @@ namespace ShopManager
         {
             InitializeComponent();
         }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnFoward_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
