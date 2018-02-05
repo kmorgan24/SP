@@ -5,8 +5,75 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShopManager"
         mc:Ignorable="d"
-        Title="CustomerCreateOrSelectWindow" Height="300" Width="300">
+        Title="CustomerCreateOrSelectWindow" Height="700" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Name="LookUpGrid" Grid.Row="0" Grid.Column="0">
+            <Button x:Name="SearchBtn" Content="Search" HorizontalAlignment="Left" Margin="303,10,0,0" VerticalAlignment="Top" Width="75" Click="SearchBtn_Click"/>
+            
+            <Label Content="Search By Last Name" HorizontalAlignment="Left" Margin="10,4,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="LastNameBox" HorizontalAlignment="Left" Height="23" Margin="10,34,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
+
+            <Label Content="Or First Name" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="FirstNameBox" HorizontalAlignment="Left" Height="23" Margin="10,88,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
+            
+            <Label Content="Or Company Name" HorizontalAlignment="Left" Margin="10,116,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="CompanyNameBox" HorizontalAlignment="Left" Height="23" Margin="10,142,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
+            
+            <Label Content="Or Phone Number" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="PhoneNumberBox" HorizontalAlignment="Left" Height="23" Margin="10,191,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181"/>
+        </Grid>
+        <Grid Name="ResultsGrid" Grid.Row="0" Grid.Column="1">
+            <StackPanel Name="ResultsPanel"/>
+        </Grid>
+        <Grid Name="NewCustomerGrid" Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content="First Name:" Grid.Row="0" Grid.Column="0"/>
+            <TextBox Name="FNameEditBox" Grid.Row="1" Grid.Column="0"/>
+
+            <Label Content="Last Name:" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Name="LNameEditBox" Grid.Row="1" Grid.Column="1"/>
+            
+            <Label Content="Spouse Name:" Grid.Row="2" Grid.Column="0"/>
+            <TextBox Name="SpouseNameEditBox" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+            
+            <Label Content="Company Name:" Grid.Row="4" Grid.Column="0"/>
+            <TextBox Name="CompanyNameEditBox" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2"/>
+            <Label Content="Phone Numbers:" Grid.Row="6" Grid.Column="0"/>
+            <Button Name="AddPhoneBtn" Grid.Row="6" Grid.Column="1" Content="+" HorizontalAlignment="Right" Width="50" Click="AddPhoneBtn_Click"/>
+            <StackPanel Name="PhoneNumberDisplay" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+        </Grid>
+        <Grid Name="CarDisplayGrid" Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <Button Name="AddCar" HorizontalAlignment="Right" Content="Add Car" Click="AddCar_Click"/>
+            <StackPanel Name="CarStackpanel" Grid.Row="1"/>
+        </Grid>
+        <Button Name="SaveAndContinueBtn" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Center" Height="25" Content="Save and Continue" Click="SaveAndContinueBtn_Click"/>
         
     </Grid>
 </Window>
