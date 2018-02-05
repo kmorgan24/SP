@@ -35,6 +35,15 @@ namespace ShopManagerClasses
             
             Dates = _dates;
             // construct a list of notes from the string list notes
+            foreach (var item in _notes)
+            {
+                Note temp = new Note();
+                temp.Active = 1;
+                temp.CarID = _car.Id;
+                temp.CustomerID = _customer.Id;
+                temp.Description = item;
+                temp.Visible = 1;
+            }
         }
     }
 }
