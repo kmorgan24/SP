@@ -31,12 +31,14 @@ namespace ShopManager
         public static IManagerService AppServer;
         private static ChannelFactory<IManagerService> _channel;
 
-        public static long IDOfSelectedAppointment;
+        public static long IndexOfSelectedAppointment;
         public static CurrentViewTypes CurrentView;
         public static DateTime CurrentWorkingDate;
 
-        public static SolidColorBrush SelectedBackground = Brushes.AliceBlue;
-        public static SolidColorBrush NotSelectedBackground = Brushes.Gray;
+        public static List<ShopManagerClasses.Appointment> AppointmentList;
+
+        public static SolidColorBrush SelectedBackground = Brushes.LightBlue;
+        public static SolidColorBrush NotSelectedBackground = Brushes.LightGray;
 
         public MainWindow()
         {
@@ -52,20 +54,22 @@ namespace ShopManager
             
             }
 
-            IDOfSelectedAppointment = 0;
+            IndexOfSelectedAppointment = 0;
             CurrentView = CurrentViewTypes.Day;
+            btnDayView.Background = SelectedBackground;
             CurrentWorkingDate = DateTime.Now;
-            List<ShopManagerClasses.Appointment> AppointmentList = new List<ShopManagerClasses.Appointment>();
+            AppointmentList = new List<ShopManagerClasses.Appointment>();
             try
             {
-                AppointmentList =  AppServer.GetAppointments(CurrentWorkingDate);
+               AppointmentList =  AppServer.GetAppointments(CurrentWorkingDate);
             }
             catch (Exception)
             {
 
                 throw;
             }
-            BottomGrid.Children.Add(new DayView(AppointmentList, CurrentWorkingDate));
+            BottomGrid.Children.Add(new DayView());
+
         }
 
         private void btnCreateNew_Click(object sender, RoutedEventArgs e)
@@ -79,6 +83,11 @@ namespace ShopManager
             btnDayView.Background = NotSelectedBackground;
             btnSingleView.Background = SelectedBackground;
             btnWeekView.Background = NotSelectedBackground;
+
+            CurrentView = CurrentViewTypes.Single;
+
+            BottomGrid.Children.Clear();
+            BottomGrid.Children.Add(new SingleView());
         }
 
         private void btnDayView_Click(object sender, RoutedEventArgs e)
@@ -86,6 +95,8 @@ namespace ShopManager
             btnDayView.Background = SelectedBackground;
             btnSingleView.Background = NotSelectedBackground;
             btnWeekView.Background = NotSelectedBackground;
+
+            CurrentView = CurrentViewTypes.Day;
         }
 
         private void btnWeekView_Click(object sender, RoutedEventArgs e)
@@ -93,6 +104,8 @@ namespace ShopManager
             btnDayView.Background = NotSelectedBackground;
             btnSingleView.Background = NotSelectedBackground;
             btnWeekView.Background = SelectedBackground;
+
+            CurrentView = CurrentViewTypes.Week;
         }
     }
 }
