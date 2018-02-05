@@ -26,7 +26,15 @@ namespace ShopManager
             InitializeComponent();
             foreach (Appointment item in MainWindow.AppointmentList)
             {
-                AppointmentStack.Children.Add(new AppointmentDisplay(item, MainWindow.CurrentWorkingDate));
+                try
+                {
+                    AppointmentStack.Children.Add(new AppointmentDisplay(item, MainWindow.CurrentWorkingDate));
+                }
+                catch (Exception)
+                {
+                    
+                }
+                
             }
             
         }

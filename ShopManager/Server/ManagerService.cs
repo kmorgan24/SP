@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using ShopManagerClasses;
+using System.Data.SQLite;
 
 namespace Server
 {
@@ -132,111 +133,121 @@ namespace Server
             using (var db = new mainEntities())
             {
                 // select from dates table any dates that match
-                var tempApps =
-                    from d in db.Dates
-                    where d.Date1 == day.ToString()
-                    select d;
-
-                foreach (var item in tempApps)
+                try
                 {
-                    var temp = new ShopManagerClasses.Appointment();
-                    temp.Id = item.AppointmentID;
-                    // select the list of dates with matching appointment ids
-                    List<ShopManagerClasses.Date> dates = new List<ShopManagerClasses.Date>();
-                    var tempDates =
+                    var tempApps =
                         from d in db.Dates
-                        where d.AppointmentID == item.AppointmentID
+                        where d.Date1 == day.ToString()
                         select d;
-                    foreach (var tempdateitem in tempDates)
+
+                    foreach (var item in tempApps)
                     {
-                        var tempSDate = new ShopManagerClasses.Date();
-                        tempSDate.AppointmentID = tempdateitem.AppointmentID;
-                        tempSDate.Date1 = tempdateitem.Date1;
-                        tempSDate.Hours = tempdateitem.Hours;
-                        tempSDate.Id = tempdateitem.Id;
-                        dates.Add(tempSDate);
+                        var temp = new ShopManagerClasses.Appointment();
+                        temp.Id = item.AppointmentID;
+                        // select the list of dates with matching appointment ids
+                        List<ShopManagerClasses.Date> dates = new List<ShopManagerClasses.Date>();
+                        var tempDates =
+                            from d in db.Dates
+                            where d.AppointmentID == item.AppointmentID
+                            select d;
+                        foreach (var tempdateitem in tempDates)
+                        {
+                            var tempSDate = new ShopManagerClasses.Date();
+                            tempSDate.AppointmentID = tempdateitem.AppointmentID;
+                            tempSDate.Date1 = tempdateitem.Date1;
+                            tempSDate.Hours = tempdateitem.Hours;
+                            tempSDate.Id = tempdateitem.Id;
+                            dates.Add(tempSDate);
+                        }
+                        temp.Dates = dates;
+                        // select the list of labor items with matching appointment ids
+                        List<ShopManagerClasses.LaborItem> labor = new List<ShopManagerClasses.LaborItem>();
+                        var tempLaborItems =
+                             from l in db.Labors
+                             where l.AppointmentID == item.AppointmentID
+                             select l;
+                        foreach (var tempLaborItem in tempLaborItems)
+                        {
+                            var tempSLabor = new ShopManagerClasses.LaborItem();
+                            tempSLabor.AppointmentID = temp.Id;
+                            tempSLabor.Id = tempLaborItem.Id;
+                            tempSLabor.Complete = (tempLaborItem.Complete == 0) ? false : true;
+                            tempSLabor.Description = tempLaborItem.Description;
+                            tempSLabor.LongDescription = "Not Yet implimented on DB";
+                            tempSLabor.Hours = tempLaborItem.Hours;
+                            labor.Add(tempSLabor);
+                        }
+                        temp.Labor = labor;
+                        // select the list of notes with matching ids
+                        List<ShopManagerClasses.Note> notes = new List<ShopManagerClasses.Note>();
+                        var tempNotes =
+                             from n in db.Notes
+                             where n.AppointmentID == temp.Id
+                             select n;
+                        foreach (var tempNoteItem in tempNotes)
+                        {
+                            var tempSNote = new ShopManagerClasses.Note();
+                            tempSNote.Active = tempNoteItem.Active;
+                            tempSNote.AppointmentID = tempNoteItem.AppointmentID;
+                            tempSNote.CarID = tempNoteItem.CarID;
+                            tempSNote.CustomerID = tempNoteItem.CustomerID;
+                            tempSNote.Description = tempNoteItem.Description;
+                            tempSNote.Id = tempNoteItem.Id;
+                            tempSNote.Visible = tempNoteItem.Visible;
+                            notes.Add(tempSNote);
+                        }
+                        temp.Notes = notes;
+                        var tempAppointment =
+                            from a in db.Appointments
+                            where a.Id == temp.Id
+                            select a;
+                        Appointment tempapp = tempAppointment.First();
+
+                        // select the car that is associated
+                        var tempCar =
+                             from c in db.Cars
+                             where c.Id == tempapp.CarID
+                             select c;
+                        Car car = tempCar.First();
+                        ShopManagerClasses.Car tempSCar = new ShopManagerClasses.Car();
+                        tempSCar.Id = car.Id;
+                        tempSCar.Make = car.Make;
+                        tempSCar.Model = car.Model;
+                        tempSCar.Owner = car.Owner;
+                        tempSCar.Plate = car.Plate;
+                        tempSCar.ProdDate = car.ProdDate;
+                        tempSCar.State = car.State;
+                        tempSCar.Vin = car.Vin;
+                        tempSCar.Year = car.Year;
+
+                        temp._car = tempSCar;
+                        // select the customer that is associated
+                        var tempCustomer =
+                             from c in db.Customers
+                             where c.Id == tempapp.CarID
+                             select c;
+                        Customer cust = tempCustomer.First();
+                        ShopManagerClasses.Customer tempSCustomer = new ShopManagerClasses.Customer();
+                        tempSCustomer.CompanyName = cust.CompanyName;
+                        tempSCustomer.FName = cust.FName;
+                        tempSCustomer.Id = cust.Id;
+                        tempSCustomer.LName = cust.LName;
+                        tempSCustomer.SpouseID = cust.SpouseID;
+
+                        temp._customer = tempSCustomer;
+
+                        apps.Add(temp);
                     }
-                   temp.Dates = dates;
-                    // select the list of labor items with matching appointment ids
-                    List<ShopManagerClasses.LaborItem> labor = new List<ShopManagerClasses.LaborItem>();
-                    var tempLaborItems =
-                         from l in db.Labors
-                         where l.AppointmentID == item.AppointmentID
-                         select l;
-                    foreach (var tempLaborItem in tempLaborItems)
-                    {
-                        var tempSLabor = new ShopManagerClasses.LaborItem();
-                        tempSLabor.AppointmentID = temp.Id;
-                        tempSLabor.Id = tempLaborItem.Id;
-                        tempSLabor.Complete = (tempLaborItem.Complete == 0) ? false : true;
-                        tempSLabor.Description = tempLaborItem.Description;
-                        tempSLabor.LongDescription = "Not Yet implimented on DB";
-                        tempSLabor.Hours = tempLaborItem.Hours;
-                        labor.Add(tempSLabor);
-                    }
-                   temp.Labor = labor;
-                    // select the list of notes with matching ids
-                    List<ShopManagerClasses.Note> notes = new List<ShopManagerClasses.Note>();
-                    var tempNotes =
-                         from n in db.Notes
-                         where n.AppointmentID == temp.Id
-                         select n;
-                    foreach (var tempNoteItem in tempNotes)
-                    {
-                        var tempSNote = new ShopManagerClasses.Note();
-                        tempSNote.Active = tempNoteItem.Active;
-                        tempSNote.AppointmentID = tempNoteItem.AppointmentID;
-                        tempSNote.CarID = tempNoteItem.CarID;
-                        tempSNote.CustomerID = tempNoteItem.CustomerID;
-                        tempSNote.Description = tempNoteItem.Description;
-                        tempSNote.Id = tempNoteItem.Id;
-                        tempSNote.Visible = tempNoteItem.Visible;
-                        notes.Add(tempSNote);
-                    }
-                    temp.Notes = notes;
-                    var tempAppointment =
-                        from a in db.Appointments
-                        where a.Id == temp.Id
-                        select a;
-                    Appointment tempapp = tempAppointment.First();
+                }
+                catch (Exception)
+                {
 
-                    // select the car that is associated
-                    var tempCar =
-                         from c in db.Cars
-                         where c.Id == tempapp.CarID
-                         select c;
-                    Car car = tempCar.First();
-                    ShopManagerClasses.Car tempSCar = new ShopManagerClasses.Car();
-                    tempSCar.Id = car.Id;
-                    tempSCar.Make = car.Make;
-                    tempSCar.Model = car.Model;
-                    tempSCar.Owner = car.Owner;
-                    tempSCar.Plate = car.Plate;
-                    tempSCar.ProdDate = car.ProdDate;
-                    tempSCar.State = car.State;
-                    tempSCar.Vin = car.Vin;
-                    tempSCar.Year = car.Year;
-
-                    temp._car = tempSCar;
-                    // select the customer that is associated
-                    var tempCustomer =
-                         from c in db.Customers
-                         where c.Id == tempapp.CarID
-                         select c;
-                    Customer cust = tempCustomer.First();
-                    ShopManagerClasses.Customer tempSCustomer = new ShopManagerClasses.Customer();
-                    tempSCustomer.CompanyName = cust.CompanyName;
-                    tempSCustomer.FName = cust.FName;
-                    tempSCustomer.Id = cust.Id;
-                    tempSCustomer.LName = cust.LName;
-                    tempSCustomer.SpouseID = cust.SpouseID;
-
-                    temp._customer = tempSCustomer;
-
-                   apps.Add(temp);
                 }
 
+
                 
+
+
 
             }
 

@@ -66,7 +66,6 @@ namespace ShopManager
             catch (Exception)
             {
 
-                throw;
             }
             BottomGrid.Children.Add(new DayView());
 
@@ -97,6 +96,8 @@ namespace ShopManager
             btnWeekView.Background = NotSelectedBackground;
 
             CurrentView = CurrentViewTypes.Day;
+            BottomGrid.Children.Clear();
+            BottomGrid.Children.Add(new DayView());
         }
 
         private void btnWeekView_Click(object sender, RoutedEventArgs e)
