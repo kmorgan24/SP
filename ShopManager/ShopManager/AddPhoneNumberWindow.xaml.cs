@@ -21,7 +21,7 @@ namespace ShopManager
     public partial class AddPhoneNumberWindow : Window
     {
         long _customerID;
-        public AddPhoneNumberWindow(int customerID)
+        public AddPhoneNumberWindow(long customerID)
         {
             InitializeComponent();
             _customerID = customerID;

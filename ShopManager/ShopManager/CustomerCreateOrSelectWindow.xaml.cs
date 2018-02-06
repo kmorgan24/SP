@@ -102,7 +102,7 @@ namespace ShopManager
 
         private void AddPhoneBtn_Click(object sender, RoutedEventArgs e)
         {
-            Window win = new AddPhoneNumberWindow();
+            Window win = new AddPhoneNumberWindow(_customer.Id);
             win.ShowDialog();
             UpdateNumbers();
         }
@@ -129,7 +129,7 @@ namespace ShopManager
 
         private void AddCar_Click(object sender, RoutedEventArgs e)
         {
-            Window win = new AddCarWindow();
+            Window win = new AddCarWindow(_customer.Id);
             win.ShowDialog();
             UpdateCars();
         }
