@@ -25,19 +25,20 @@ namespace Server
 
         [OperationContract]
         List<ShopManagerClasses.Appointment> GetAppointments(DateTime start);
-
+        [OperationContract]
+        List<ShopManagerClasses.User> GetUsers();
         [OperationContract]
         List<ShopManagerClasses.Customer> SearchCustomerByCompanyName(string text);
 
         [OperationContract]
         List<ShopManagerClasses.Customer> SearchCustomerByPhoneNumber(string text);
-
+        void AddTechnician(Technician temp);
         [OperationContract]
         List<ShopManagerClasses.Customer> SearchCustomerByLastName(string text);
 
         [OperationContract]
         void AddCar(long _customer, ShopManagerClasses.Car temp);
-
+        void AddServiceAdvisor(ServiceAdvisor temp);
         [OperationContract]
         void AddPhoneNumber(ShopManagerClasses.PhoneNumber num, long _customerID);
 

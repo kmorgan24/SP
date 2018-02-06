@@ -65,6 +65,16 @@ namespace Server
             }
         }
 
+        public void AddServiceAdvisor(ServiceAdvisor temp)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddTechnician(Technician temp)
+        {
+            throw new NotImplementedException();
+        }
+
 
         /*
         using (var db = new mainEntities())
@@ -386,6 +396,54 @@ namespace Server
             }
 
             return RPhoneNumber;
+        }
+
+        public List<ShopManagerClasses.User> GetUsers()
+        {
+            List<ShopManagerClasses.User> RUsers = new List<ShopManagerClasses.User>();
+            using (var db = new mainEntities())
+            {
+                try
+                {
+                var users =
+                    from u in db.Users
+                    where u.TargetHours != -1
+                    select u;
+                foreach (var item in users)
+                {
+                    ShopManagerClasses.Technician tempSUser = new ShopManagerClasses.Technician();
+                    tempSUser.Id = item.Id;
+                    tempSUser.LoggedIn = item.LoggedIn;
+                    tempSUser.LoginName = item.LoginName;
+                    tempSUser.Name = item.Name;
+                    tempSUser.Password = item.Password;
+                    tempSUser.Skill = item.Skill;
+                    tempSUser.TargetHours = item.TargetHours;
+                    RUsers.Add(tempSUser);
+                }
+
+                var Susers =
+                    from u in db.Users
+                    where u.TargetHours == -1
+                    select u;
+                foreach (var item2 in users)
+                {
+                    ShopManagerClasses.ServiceAdvisor tempSAdvisor = new ShopManagerClasses.ServiceAdvisor();
+                    tempSAdvisor.Id = item2.Id;
+                    tempSAdvisor.LoggedIn = item2.LoggedIn;
+                    tempSAdvisor.LoginName = item2.LoginName;
+                    tempSAdvisor.Name = item2.Name;
+                    tempSAdvisor.Password = item2.Password;
+                    RUsers.Add(tempSAdvisor);
+                }
+                }
+                catch (Exception)
+                {
+
+                }
+                
+            }
+            return RUsers;
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShopManagerClasses
 {
-    class ServiceAdvisor : User
+    public class ServiceAdvisor : User
     {
         public long Active
         {
