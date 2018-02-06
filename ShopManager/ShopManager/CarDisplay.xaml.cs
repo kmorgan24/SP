@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopManagerClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,22 +13,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ShopManagerClasses;
 
 namespace ShopManager
 {
     /// <summary>
-    /// Interaction logic for CustomerResultDisplay.xaml
+    /// Interaction logic for CarDisplay.xaml
     /// </summary>
-    public partial class CustomerResultDisplay : UserControl
+    public partial class CarDisplay : UserControl
     {
-        public Customer _cust;
-        public CustomerResultDisplay(Customer cust)
+        public Car _car;
+        public CarDisplay(Car car)
         {
-            _cust = cust;
             InitializeComponent();
-            CustomerName.Content = _cust.FName + " " + _cust.LName;
-            CompanyName.Content = _cust.CompanyName;
+            _car = car;
+            YearMakeModel.Content = car.Year + " " + car.Make + " " + car.Model;
+            Vin.Content = car.Vin;
         }
     }
 }

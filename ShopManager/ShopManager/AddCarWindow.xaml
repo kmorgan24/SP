@@ -1,0 +1,45 @@
+﻿<Window x:Class="ShopManager.AddCarWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShopManager"
+        mc:Ignorable="d"
+        Title="AddCarWindow" Height="300" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Year" Grid.Row="0"/>
+        <Label Content="Make" Grid.Row="1"/>
+        <Label Content="Model" Grid.Row="2"/>
+        <Label Content="Engine" Grid.Row="3"/>
+        <Label Content="Vin" Grid.Row="4"/>
+        <Label Content="Production Date" Grid.Row="5"/>
+        <Label Content="Plate Number" Grid.Row="6"/>
+        <Label Content="Issuing State" Grid.Row="7"/>
+
+        <TextBox Name="YearBox" Text="" Grid.Row="0" Grid.Column="1"/>
+        <TextBox Name="MakeBox" Text="" Grid.Row="1" Grid.Column="1"/>
+        <TextBox Name="ModelBox" Text="" Grid.Row="2" Grid.Column="1"/>
+        <TextBox Name="EngineBox" Text="" Grid.Row="3" Grid.Column="1"/>
+        <TextBox Name="VinBox" Text="" Grid.Row="4" Grid.Column="1"/>
+        <TextBox Name="ProdDateBox" Text="" Grid.Row="5" Grid.Column="1"/>
+        <TextBox Name="PlateBox" Text="" Grid.Row="6" Grid.Column="1"/>
+        <TextBox Name="StateBox" Text="" Grid.Row="7" Grid.Column="1"/>
+
+        <Button Name="SaveBtn" Content="Save" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" Width="75" Click="SaveBtn_Click"/>
+    </Grid>
+</Window>

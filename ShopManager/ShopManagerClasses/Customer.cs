@@ -13,7 +13,7 @@ namespace ShopManagerClasses
         public string LName { get; set; }
         public Nullable<long> SpouseID { get; set; }
         public string CompanyName { get; set; }
-
+       
         public Customer(long id, string fname, string lname, long? spouseid, string companyname)
         {
             Id = id;
@@ -24,7 +24,7 @@ namespace ShopManagerClasses
         }
         public Customer()
         {
-
+            Id = -1;
         }
     }
 }
