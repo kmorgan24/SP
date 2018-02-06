@@ -36,6 +36,21 @@ namespace Server
         List<ShopManagerClasses.Customer> SearchCustomerByLastName(string text);
 
         [OperationContract]
+        void AddCar(long _customer, ShopManagerClasses.Car temp);
+
+        [OperationContract]
+        void AddPhoneNumber(ShopManagerClasses.PhoneNumber num, long _customerID);
+
+        [OperationContract]
         List<ShopManagerClasses.Customer> SearchCustomerByFirstName(string text);
+
+        [OperationContract]
+        long CreateCustomer(string companyName, string fName, string lName, long? spouseID);
+
+        [OperationContract]
+        List<ShopManagerClasses.Car> GetCarsByCustomerID(long id);
+
+        [OperationContract]
+        List<ShopManagerClasses.PhoneNumber> GetCustomerPhoneNumbersByCustomerID(long id);
     }
 }

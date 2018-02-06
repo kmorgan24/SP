@@ -14,6 +14,56 @@ namespace Server
 
     public class ManagerService : IManagerService
     {
+        public void AddCar(long _customer, ShopManagerClasses.Car temp)
+        {
+            using (var db = new mainEntities())
+            {
+                Car c = new Car
+                {
+                    Id = db.Cars.Count() + 1,
+                    Make = temp.Make,
+                    Model = temp.Model,
+                    Owner = temp.Owner,
+                    Plate = temp.Plate,
+                    ProdDate = temp.ProdDate,
+                    State = temp.State,
+                    Vin = temp.Vin,
+                    Year = temp.Year
+                };
+                db.Cars.Add(c);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        public void AddPhoneNumber(ShopManagerClasses.PhoneNumber num, long _customerID)
+        {
+            using (var db = new mainEntities())
+            {
+                PhoneNumber numb = new PhoneNumber
+                {
+                    Id = db.PhoneNumbers.Count() + 1,
+                    CustomerID = _customerID,
+                    Number = num.Number,
+                    Type = num.Type
+                };
+                db.PhoneNumbers.Add(numb);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
 
 
         /*
@@ -121,6 +171,33 @@ namespace Server
                 }
 
             }
+        }
+
+        public long CreateCustomer(string companyName, string fName, string lName, long? spouseID)
+        {
+            long Rvalue = -1;
+            using (var db = new mainEntities())
+            {
+                Customer c = new Customer
+                {
+                    Id = db.Customers.Count() + 1,
+                    CompanyName = companyName,
+                    FName = fName,
+                    LName = lName,
+                    SpouseID = spouseID
+                };
+                db.Customers.Add(c);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+                    return Rvalue;
+                }
+                Rvalue = c.Id;
+            }
+            return Rvalue;
         }
 
         public bool DoWork()
@@ -259,6 +336,56 @@ namespace Server
 
 
             return apps;
+        }
+
+        public List<ShopManagerClasses.Car> GetCarsByCustomerID(long id)
+        {
+            List<ShopManagerClasses.Car> RCars = new List<ShopManagerClasses.Car>();
+            using (var db = new mainEntities())
+            {
+                var cars =
+                    from c in db.Cars
+                    where c.Owner == id
+                    select c;
+                foreach (var item in cars)
+                {
+                    ShopManagerClasses.Car tempSCar = new ShopManagerClasses.Car();
+                    tempSCar.Id = item.Id;
+                    tempSCar.Make = item.Make;
+                    tempSCar.Model = item.Model;
+                    tempSCar.Owner = item.Owner;
+                    tempSCar.Plate = item.Plate;
+                    tempSCar.ProdDate = item.ProdDate;
+                    tempSCar.State = item.State;
+                    tempSCar.Vin = item.Vin;
+                    tempSCar.Year = item.Year;
+                    RCars.Add(tempSCar);
+                }
+            }
+            return RCars;
+        }
+
+        public List<ShopManagerClasses.PhoneNumber> GetCustomerPhoneNumbersByCustomerID(long id)
+        {
+            List<ShopManagerClasses.PhoneNumber> RPhoneNumber = new List<ShopManagerClasses.PhoneNumber>();
+            using (var db = new mainEntities())
+            {
+                var nums =
+                    from n in db.PhoneNumbers
+                    where n.CustomerID == id
+                    select n;
+                foreach (var item in nums)
+                {
+                    ShopManagerClasses.PhoneNumber temp = new ShopManagerClasses.PhoneNumber();
+                    temp.CustomerID = item.CustomerID;
+                    temp.Id = item.Id;
+                    temp.Number = item.Number;
+                    temp.Type = item.Type;
+                    RPhoneNumber.Add(temp);
+                }
+            }
+
+            return RPhoneNumber;
         }
 
         /// <summary>
