@@ -65,14 +65,58 @@ namespace Server
             }
         }
 
-        public void AddServiceAdvisor(ServiceAdvisor temp)
+        public void AddServiceAdvisor(ServiceAdvisor Newuser)
         {
-            throw new NotImplementedException();
+            using (var db = new mainEntities())
+            {
+                User tempuser = new User
+                {
+                    Id = db.Users.Count() + 1,
+                    LoggedIn = 0,
+                    Active = Newuser.Active,
+                    LoginName = Newuser.LoginName,
+                    Name = Newuser.Name,
+                    Password = Newuser.Password,
+                    Skill = -1,
+                    TargetHours = -1
+                };
+                db.Users.Add(tempuser);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
 
-        public void AddTechnician(Technician temp)
+        public void AddTechnician(Technician Newuser)
         {
-            throw new NotImplementedException();
+            using (var db = new mainEntities())
+            {
+                User tempuser = new User
+                {
+                    Id = db.Users.Count() + 1,
+                    LoggedIn = 0,
+                    Active = Newuser.Active,
+                    LoginName = Newuser.LoginName,
+                    Name = Newuser.Name,
+                    Password = Newuser.Password,
+                    Skill = Newuser.Skill,
+                    TargetHours = Newuser.TargetHours
+                };
+                db.Users.Add(tempuser);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
         }
 
 
@@ -208,6 +252,22 @@ namespace Server
                 Rvalue = c.Id;
             }
             return Rvalue;
+        }
+
+        public void DeactivateUser(long selectedUserID)
+        {
+            using (var db = new mainEntities())
+            {
+                var target =
+                    from t in db.Users
+                    where t.Id == selectedUserID
+                    select t;
+                foreach (var item in target)
+                {
+                    item.Active = 0;
+                }
+                db.SaveChanges();
+            }
         }
 
         public bool DoWork()
