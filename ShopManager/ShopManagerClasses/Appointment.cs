@@ -43,6 +43,7 @@ namespace ShopManagerClasses
                 temp.CustomerID = _customer.Id;
                 temp.Description = item;
                 temp.Visible = 1;
+                Notes.Add(temp);
             }
         }
     }
