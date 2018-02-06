@@ -108,5 +108,11 @@ namespace ShopManager
 
             CurrentView = CurrentViewTypes.Week;
         }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            Window win = new SettingsWindow();
+            win.ShowDialog();
+        }
     }
 }
