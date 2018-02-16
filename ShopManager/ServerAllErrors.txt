@@ -1,0 +1,5 @@
+<ServerStart>
+	<ERROR_TYPE=INFO/>
+	<ErrMsg=The Server Started/>
+	<ErrTime=2/15/2018 4:56:45 PM/>
+</ServerStart>

@@ -6,6 +6,7 @@ using System.ServiceModel;
 using System.Text;
 using ShopManagerClasses;
 using System.Data.SQLite;
+using ManagerLogger;
 
 namespace Server
 {
@@ -35,9 +36,9 @@ namespace Server
                 {
                     db.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
                 }
             }
         }
@@ -58,9 +59,9 @@ namespace Server
                 {
                     db.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
                 }
             }
         }
@@ -85,9 +86,9 @@ namespace Server
                 {
                     db.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
                 }
             }
         }
@@ -112,9 +113,9 @@ namespace Server
                 {
                     db.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
                 }
             }
         }
@@ -219,9 +220,9 @@ namespace Server
                 {
                     db.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
                 }
 
             }
@@ -245,8 +246,9 @@ namespace Server
                 {
                     db.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
                     return Rvalue;
                 }
                 Rvalue = c.Id;
@@ -266,7 +268,15 @@ namespace Server
                 {
                     item.Active = 0;
                 }
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
+                }
+
             }
         }
 
@@ -392,8 +402,9 @@ namespace Server
                         apps.Add(temp);
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
 
                 }
 
@@ -465,43 +476,43 @@ namespace Server
             {
                 try
                 {
-                var users =
-                    from u in db.Users
-                    where u.TargetHours != -1
-                    select u;
-                foreach (var item in users)
+                    var users =
+                        from u in db.Users
+                        where u.TargetHours != -1
+                        select u;
+                    foreach (var item in users)
+                    {
+                        ShopManagerClasses.Technician tempSUser = new ShopManagerClasses.Technician();
+                        tempSUser.Id = item.Id;
+                        tempSUser.LoggedIn = item.LoggedIn;
+                        tempSUser.LoginName = item.LoginName;
+                        tempSUser.Name = item.Name;
+                        tempSUser.Password = item.Password;
+                        tempSUser.Skill = item.Skill;
+                        tempSUser.TargetHours = item.TargetHours;
+                        RUsers.Add(tempSUser);
+                    }
+
+                    var Susers =
+                        from u in db.Users
+                        where u.TargetHours == -1
+                        select u;
+                    foreach (var item2 in users)
+                    {
+                        ShopManagerClasses.ServiceAdvisor tempSAdvisor = new ShopManagerClasses.ServiceAdvisor();
+                        tempSAdvisor.Id = item2.Id;
+                        tempSAdvisor.LoggedIn = item2.LoggedIn;
+                        tempSAdvisor.LoginName = item2.LoginName;
+                        tempSAdvisor.Name = item2.Name;
+                        tempSAdvisor.Password = item2.Password;
+                        RUsers.Add(tempSAdvisor);
+                    }
+                }
+                catch (Exception e)
                 {
-                    ShopManagerClasses.Technician tempSUser = new ShopManagerClasses.Technician();
-                    tempSUser.Id = item.Id;
-                    tempSUser.LoggedIn = item.LoggedIn;
-                    tempSUser.LoginName = item.LoginName;
-                    tempSUser.Name = item.Name;
-                    tempSUser.Password = item.Password;
-                    tempSUser.Skill = item.Skill;
-                    tempSUser.TargetHours = item.TargetHours;
-                    RUsers.Add(tempSUser);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
                 }
 
-                var Susers =
-                    from u in db.Users
-                    where u.TargetHours == -1
-                    select u;
-                foreach (var item2 in users)
-                {
-                    ShopManagerClasses.ServiceAdvisor tempSAdvisor = new ShopManagerClasses.ServiceAdvisor();
-                    tempSAdvisor.Id = item2.Id;
-                    tempSAdvisor.LoggedIn = item2.LoggedIn;
-                    tempSAdvisor.LoginName = item2.LoginName;
-                    tempSAdvisor.Name = item2.Name;
-                    tempSAdvisor.Password = item2.Password;
-                    RUsers.Add(tempSAdvisor);
-                }
-                }
-                catch (Exception)
-                {
-
-                }
-                
             }
             return RUsers;
         }
@@ -527,9 +538,9 @@ namespace Server
                         ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
                 }
                 return results;
             }
@@ -556,9 +567,9 @@ namespace Server
                         ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
                 }
                 return results;
             }
@@ -585,9 +596,9 @@ namespace Server
                         ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
                     }
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
                 }
                 return results;
             }
@@ -624,9 +635,9 @@ namespace Server
 
 
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
                 }
                 return results;
             }

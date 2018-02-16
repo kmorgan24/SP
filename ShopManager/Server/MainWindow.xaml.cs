@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ManagerLogger;
 
 namespace Server
 {
@@ -22,15 +23,18 @@ namespace Server
     public partial class MainWindow : Window
     {
         public static ManagerService _server;
+        public ServerErrorLogger _logger;
         public MainWindow()
         {
+            _logger = ServerErrorLogger.GetInstance();
             try
             {
                 startService();
+                _logger.WriteError(ERR_TYPES_SERVER.SERVER_START, LOGGING_LEVEL.INFO , "The Server Started");
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                _logger.WriteError(ERR_TYPES_SERVER.SERVER_START, LOGGING_LEVEL.FATAL_ERROR, "The service failed to start", e.Message);
                
             }
             

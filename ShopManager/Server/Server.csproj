@@ -203,6 +203,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ManagerLogger\ManagerLogger.csproj">
+      <Project>{053a06ee-4516-4087-8444-b3c4c8825893}</Project>
+      <Name>ManagerLogger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ShopManagerClasses\ShopManagerClasses.csproj">
       <Project>{53e57cc0-89eb-4ab5-9469-39ecffd46dae}</Project>
       <Name>ShopManagerClasses</Name>
