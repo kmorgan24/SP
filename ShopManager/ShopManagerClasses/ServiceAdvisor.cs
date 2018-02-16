@@ -8,16 +8,23 @@ namespace ShopManagerClasses
 {
     public class ServiceAdvisor : User
     {
+        long _active;
+        long _id;
+        long _loggedIN;
+        string _loginName;
+        string _name;
+        string _password;
+
         public long Active
         {
             get
             {
-                throw new NotImplementedException();
+                return _active;
             }
 
             set
             {
-                throw new NotImplementedException();
+                _active = value;
             }
         }
 
@@ -25,12 +32,12 @@ namespace ShopManagerClasses
         {
             get
             {
-                throw new NotImplementedException();
+                return _id;
             }
 
             set
             {
-                throw new NotImplementedException();
+                _id = value;
             }
         }
 
@@ -38,12 +45,12 @@ namespace ShopManagerClasses
         {
             get
             {
-                throw new NotImplementedException();
+                return _loggedIN;
             }
 
             set
             {
-                throw new NotImplementedException();
+                _loggedIN = value;
             }
         }
 
@@ -51,12 +58,12 @@ namespace ShopManagerClasses
         {
             get
             {
-                throw new NotImplementedException();
+                return _loginName;
             }
 
             set
             {
-                throw new NotImplementedException();
+                _loginName = value;
             }
         }
 
@@ -64,12 +71,12 @@ namespace ShopManagerClasses
         {
             get
             {
-                throw new NotImplementedException();
+                return _name;
             }
 
             set
             {
-                throw new NotImplementedException();
+                _name = value;
             }
         }
 
@@ -77,12 +84,12 @@ namespace ShopManagerClasses
         {
             get
             {
-                throw new NotImplementedException();
+                return _password;
             }
 
             set
             {
-                throw new NotImplementedException();
+                _password = value;
             }
         }
     }

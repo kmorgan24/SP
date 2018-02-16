@@ -19,8 +19,8 @@ namespace ShopManagerClasses
         public List<Date> Dates;
         public Customer _customer;
         public Car _car;
-        
-        
+
+
         // a date has the number of hours that will be taken up inside of it
         public Appointment()
         {
@@ -32,7 +32,7 @@ namespace ShopManagerClasses
             this._customer = _customer;
             this._car = _car;
             Labor = _labor;
-            
+
             Dates = _dates;
             // construct a list of notes from the string list notes
             foreach (var item in _notes)
@@ -45,6 +45,28 @@ namespace ShopManagerClasses
                 temp.Visible = 1;
                 Notes.Add(temp);
             }
+        }
+        public override string ToString()
+        {
+            string temp = Environment.NewLine + "Object Appointment";
+            foreach (Note n in Notes)
+            {
+                temp += n;
+            }
+            foreach (LaborItem li in Labor)
+            {
+                temp += li;
+            }
+            foreach (Date d in Dates)
+            {
+                temp += d;
+            }
+
+            temp += _customer;
+
+            temp += _car;
+
+            return temp;
         }
     }
 }

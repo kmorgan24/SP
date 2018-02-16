@@ -15,5 +15,18 @@ namespace ShopManagerClasses
         public string Description { get; set; }
         public long Active { get; set; }
         public long Visible { get; set; }
+
+        public override string ToString()
+        {
+            string temp = Environment.NewLine + "Object Note";
+            temp += Environment.NewLine + "Id=" + Id;
+            temp += Environment.NewLine + "AppointmentId=" + AppointmentID;
+            temp += Environment.NewLine + "CustomerId=" + CustomerID;
+            temp += Environment.NewLine + "CarId=" + CarID;
+            temp += Environment.NewLine + "Description=" + Description;
+            temp += Environment.NewLine + "Active=" + Active;
+            temp += Environment.NewLine + "Visible=" + Visible;
+            return temp;
+        }
     }
 }

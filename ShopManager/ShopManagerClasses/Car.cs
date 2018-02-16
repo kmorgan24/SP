@@ -17,5 +17,20 @@ namespace ShopManagerClasses
         public string Plate { get; set; }
         public long Owner { get; set; }
         public string ProdDate { get; set; }
+
+        public override string ToString()
+        {
+            string temp = Environment.NewLine + "Object Car";
+            temp += Environment.NewLine + "Id=" + Id;
+            temp += Environment.NewLine + "Make=" + Make;
+            temp += Environment.NewLine + "Model=" + Model;
+            temp += Environment.NewLine + "Year=" + Year;
+            temp += Environment.NewLine + "Vin=" + Vin;
+            temp += Environment.NewLine + "State=" + State;
+            temp += Environment.NewLine + "Plate=" + Plate;
+            temp += Environment.NewLine + "Owner=" + Owner;
+            temp += Environment.NewLine + "ProdDate=" + ProdDate;
+            return temp;
+        }
     }
 }

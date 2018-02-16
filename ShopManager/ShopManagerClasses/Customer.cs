@@ -26,5 +26,16 @@ namespace ShopManagerClasses
         {
             Id = -1;
         }
+        public override string ToString()
+        {
+            string temp = Environment.NewLine + "Object Customer";
+            temp += Environment.NewLine + "Id=" + Id;
+            temp += Environment.NewLine + "FName=" + FName;
+            temp += Environment.NewLine + "LName=" + LName;
+            temp += Environment.NewLine + "SpouseID=" + SpouseID;
+            temp += Environment.NewLine + "CompanyName=" + CompanyName;
+
+            return temp;
+        }
     }
 }

@@ -27,5 +27,14 @@ namespace ShopManagerClasses
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
+
+        public override string ToString()
+        {
+            string temp = Environment.NewLine + "Object Address";
+            temp += Environment.NewLine + "ID=" + ID.ToString() + Environment.NewLine + "L1=" + LineOne + Environment.NewLine + "L2=" + LineTwo;
+            temp += Environment.NewLine + "City=" + City + Environment.NewLine + "State=" +  State + Environment.NewLine + "Zip=" + Zip;
+
+            return temp;
+        }
     }
 }

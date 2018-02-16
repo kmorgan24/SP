@@ -12,5 +12,15 @@ namespace ShopManagerClasses
         public long CustomerID { get; set; }
         public string Number { get; set; }
         public long Type { get; set; }
+
+        public override string ToString()
+        {
+            string temp = Environment.NewLine + "Object PhoneNumber";
+            temp += Environment.NewLine + "Id=" + Id;
+            temp += Environment.NewLine + "CustomerID=" + CustomerID;
+            temp += Environment.NewLine + "Number=" + Number;
+            temp += Environment.NewLine + "Type=" + Type;
+            return temp;
+        }
     }
 }
