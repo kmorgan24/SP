@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ShopManagerClasses;
-
+using ManagerLogger;
 
 namespace ShopManager
 {
@@ -26,6 +26,7 @@ namespace ShopManager
         private Customer _customer;
         private Car _car;
         private List<Date> _dates;
+        
 
         public CreateAppointmentWindow()
         {
@@ -35,6 +36,7 @@ namespace ShopManager
             _customer = new Customer();
             _car = new Car();
             _dates = new List<Date>();
+            
         }
         
 
@@ -96,9 +98,9 @@ namespace ShopManager
             {
                 MainWindow.AppServer.CreateAppointmentFromClass(a);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_UNABLE_TO_READWRITE, ex.Message, "Could Not create appointment" + a);
             }
             
             this.Close();

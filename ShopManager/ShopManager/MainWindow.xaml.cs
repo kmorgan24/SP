@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Server;
+using ManagerLogger;
 
 namespace ShopManager
 {
@@ -48,12 +49,11 @@ namespace ShopManager
                 _channel = new ChannelFactory<IManagerService>("ManagerEndpoint");
                 AppServer = _channel.CreateChannel();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw new InvalidOperationException();
-            
+                UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_SERVER_CONNECTION_ERROR, e.Message, "Failed to open Comm chanel");
             }
-
+            UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_GUI_LOGIN, "Program started");
             IndexOfSelectedAppointment = 0;
             CurrentView = CurrentViewTypes.Day;
             btnDayView.Background = SelectedBackground;
@@ -63,9 +63,9 @@ namespace ShopManager
             {
                AppointmentList =  AppServer.GetAppointments(CurrentWorkingDate);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_UNABLE_TO_READWRITE, e.Message, "Could Not get appointments List");
             }
             BottomGrid.Children.Add(new DayView());
 
@@ -113,6 +113,12 @@ namespace ShopManager
         {
             Window win = new SettingsWindow();
             win.ShowDialog();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_GUI_LOGOUT, "Program Closed");
+            UserErrorLogger.GetInstance().ForceWrite();
         }
     }
 }

@@ -24,7 +24,11 @@ namespace ShopManagerClasses
         // a date has the number of hours that will be taken up inside of it
         public Appointment()
         {
-
+            Notes = new List<Note>();
+            Labor = new List<LaborItem>();
+            Dates = new List<Date>();
+            _customer = new Customer();
+            _car = new Car();
         }
 
         public Appointment(Customer _customer, Car _car, List<LaborItem> _labor, List<string> _notes, List<Date> _dates)
@@ -49,18 +53,40 @@ namespace ShopManagerClasses
         public override string ToString()
         {
             string temp = Environment.NewLine + "Object Appointment";
-            foreach (Note n in Notes)
+            try
             {
-                temp += n;
+                foreach (Note n in Notes)
+                {
+                    temp += n;
+                }
             }
-            foreach (LaborItem li in Labor)
+            catch (Exception)
             {
-                temp += li;
+                temp += Environment.NewLine + "Notes List is Null";
             }
-            foreach (Date d in Dates)
+            try
             {
-                temp += d;
+                foreach (LaborItem li in Labor)
+                {
+                    temp += li;
+                }
             }
+            catch (Exception)
+            {
+                temp += Environment.NewLine + "Labor List is Null";
+            }
+            try
+            {
+                foreach (Date d in Dates)
+                {
+                    temp += d;
+                }
+            }
+            catch (Exception)
+            {
+                temp += Environment.NewLine + "Date List is Null";
+            }
+
 
             temp += _customer;
 

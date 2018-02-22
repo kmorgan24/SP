@@ -29,5 +29,10 @@ namespace ShopManager
             YearMakeModel.Content = car.Year + " " + car.Make + " " + car.Model;
             Vin.Content = car.Vin;
         }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CustomerCreateOrSelectWindow._car = this._car;
+        }
     }
 }

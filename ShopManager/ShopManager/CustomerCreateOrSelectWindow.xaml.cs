@@ -1,4 +1,5 @@
-﻿using ShopManagerClasses;
+﻿using ManagerLogger;
+using ShopManagerClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,8 +21,8 @@ namespace ShopManager
     public partial class CustomerCreateOrSelectWindow : Window
     {
         private Customer _customer;
-        private Car _car;
-
+        public static Car _car;
+        
         private List<Car> CarsList;
         private List<PhoneNumber> PhoneList;
         public CustomerCreateOrSelectWindow(Customer cust, Car car)
@@ -32,6 +33,7 @@ namespace ShopManager
 
             CarsList = new List<Car>();
             PhoneList = new List<PhoneNumber>();
+            
             //MainWindow.AppServer.DoWork(); // does nothing 
 
         }
@@ -47,9 +49,9 @@ namespace ShopManager
                 {
                     resultsList = MainWindow.AppServer.SearchCustomerByCompanyName(CompanyNameBox.Text);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_UNABLE_TO_READWRITE, ex.Message, "Could Not get Customer by company name");
                 }
 
             }
@@ -59,9 +61,9 @@ namespace ShopManager
                 {
                     resultsList = MainWindow.AppServer.SearchCustomerByPhoneNumber(PhoneNumberBox.Text);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_UNABLE_TO_READWRITE, ex.Message, "Could Not get Customer by Phone number");
                 }
 
 
@@ -72,9 +74,9 @@ namespace ShopManager
                 {
                     resultsList = MainWindow.AppServer.SearchCustomerByLastName(LastNameBox.Text);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_UNABLE_TO_READWRITE, ex.Message, "Could Not get Customer by Last Name");
                 }
 
             }
@@ -84,9 +86,9 @@ namespace ShopManager
                 {
                     resultsList = MainWindow.AppServer.SearchCustomerByFirstName(FirstNameBox.Text);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    
+                    UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_UNABLE_TO_READWRITE, ex.Message, "Could Not get Customer by First Name");
                 }
 
             }
@@ -117,7 +119,27 @@ namespace ShopManager
             {
                 if (_customer.Id == -1) // it was never set
                 {
+                    if (FNameEditBox.Text != "")
+                    {
+                        _customer.FName = FNameEditBox.Text;
+                    }
+                    else
+                    {
+                        //error
+                    }
+                    if (LNameEditBox.Text != "")
+                    {
+                        _customer.LName = LNameEditBox.Text;
+                    }
+                    else
+                    {
+                        //error
+                    }
+                    _customer.CompanyName = CompanyNameEditBox.Text;
+
+
                     _customer.Id = MainWindow.AppServer.CreateCustomer(_customer.CompanyName, _customer.FName, _customer.LName, _customer.SpouseID);
+                    
                 }
                 else
                 {

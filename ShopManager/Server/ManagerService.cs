@@ -178,51 +178,75 @@ namespace Server
                     CustomerID = a._customer.Id
                 };
                 db.Appointments.Add(app);
+                try
+                {
+                    foreach (ShopManagerClasses.Date item in a.Dates)
+                    {
+                        Date d = new Date
+                        {
+                            Id = db.Dates.Count() + 1,
+                            Date1 = item.Date1,
+                            Hours = item.Hours,
+                            AppointmentID = item.AppointmentID
+                        };
+                        db.Dates.Add(d);
+                    }
+                }
+                catch (Exception e)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "No Dates were included", e.Message);
+                    throw new InvalidOperationException("a date must be supplied");
+                }
+                try
+                {
+                    foreach (ShopManagerClasses.Note item in a.Notes)
+                    {
+                        Note n = new Note
+                        {
+                            Id = db.Notes.Count() + 1,
+                            Active = item.Active,
+                            AppointmentID = app.Id,
+                            CarID = app.CarID,
+                            CustomerID = app.CustomerID,
+                            Description = item.Description,
+                            Visible = item.Visible
+                        };
+                        db.Notes.Add(n);
+                    }
+                }
+                catch (Exception e)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "No Notes were included", e.Message);
 
-                foreach (ShopManagerClasses.Date item in a.Dates)
-                {
-                    Date d = new Date
-                    {
-                        Id = db.Dates.Count() + 1,
-                        Date1 = item.Date1,
-                        Hours = item.Hours,
-                        AppointmentID = item.AppointmentID
-                    };
-                    db.Dates.Add(d);
                 }
-                foreach (ShopManagerClasses.Note item in a.Notes)
+                try
                 {
-                    Note n = new Note
+                    foreach (ShopManagerClasses.LaborItem item in a.Labor)
                     {
-                        Id = db.Notes.Count() + 1,
-                        Active = item.Active,
-                        AppointmentID = app.Id,
-                        CarID = app.CarID,
-                        CustomerID = app.CustomerID,
-                        Description = item.Description,
-                        Visible = item.Visible
-                    };
-                    db.Notes.Add(n);
+                        Labor l = new Labor
+                        {
+                            Id = db.Labors.Count() + 1,
+                            AppointmentID = app.Id,
+                            Complete = 0,
+                            Description = item.Description,
+                            Hours = (long)item.Hours    // this needs changed on the DB to support tenths of an hour
+                        };
+                        db.Labors.Add(l);
+                    }
                 }
-                foreach (ShopManagerClasses.LaborItem item in a.Labor)
+                catch (Exception e)
                 {
-                    Labor l = new Labor
-                    {
-                        Id = db.Labors.Count() + 1,
-                        AppointmentID = app.Id,
-                        Complete = 0,
-                        Description = item.Description,
-                        Hours = (long)item.Hours    // this needs changed on the DB to support tenths of an hour
-                    };
-                    db.Labors.Add(l);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "No Labor items were included", e.Message);
+                    throw new InvalidOperationException("a LaborItem must be supplied");
                 }
+
                 try
                 {
                     db.SaveChanges();
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message + a);
                 }
 
             }

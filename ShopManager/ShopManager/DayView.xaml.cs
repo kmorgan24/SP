@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ShopManagerClasses;
+using ManagerLogger;
 
 namespace ShopManager
 {
@@ -30,9 +31,9 @@ namespace ShopManager
                 {
                     AppointmentStack.Children.Add(new AppointmentDisplay(item, MainWindow.CurrentWorkingDate));
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    
+                    UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_UNABLE_TO_READWRITE, ex.Message, "Could Not add appointment to appointmetn stack" + item);                   
                 }
                 
             }

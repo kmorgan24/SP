@@ -19,7 +19,7 @@ namespace ManagerLogger
     }
     public class UserErrorLogger
     {
-        private const string filePath = "./UserGuiAllErrors.txt";
+        private const string filePath = "../../../UserGuiAllErrors.txt";
         private string errorDesc = "No Desc Transmitted";
         private List<ErrContainer> ErrorsList = new List<ErrContainer>();
         private static UserErrorLogger _instance;
