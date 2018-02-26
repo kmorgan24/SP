@@ -12,6 +12,7 @@ namespace ManagerLogger
     {
         private string filePath = "../../../ServerAllErrors.txt";
         private string errorDesc = "No Desc Transmitted";
+        private string funcname = "No Function name supplied";
         private List<ErrContainerServer> ErrorsList = new List<ErrContainerServer>();
         private static ServerErrorLogger _instance;
 
@@ -26,12 +27,14 @@ namespace ManagerLogger
             return _instance;
         }
 
-        public void WriteError(ERR_TYPES_SERVER err_type, LOGGING_LEVEL err_level, string err, string additionalInfo = null)
+        public void WriteError(ERR_TYPES_SERVER err_type, LOGGING_LEVEL err_level, string err, string FuncName, string additionalInfo = null)
         {
             if (err != null)
                 errorDesc = err;
+            if (FuncName != null)
+                funcname = FuncName;
 
-            AddErrorsToList(err_type, err_level, err, additionalInfo);
+            AddErrorsToList(err_type, err_level, err, funcname, additionalInfo);
 
             if (ErrorsList.Count > 30)
                 OutputErrors();
@@ -67,7 +70,7 @@ namespace ManagerLogger
             catch (Exception)
             { }
         }
-        private void AddErrorsToList(ERR_TYPES_SERVER errType, LOGGING_LEVEL errLevel, string errMsg, string additionalInfo = null)
+        private void AddErrorsToList(ERR_TYPES_SERVER errType, LOGGING_LEVEL errLevel, string errMsg, string FuncName, string additionalInfo = null)
         {
             string errTypeStartMark;
             string errTypeEndMark;
@@ -91,42 +94,42 @@ namespace ManagerLogger
                     // write to the master log file
                     errTypeStartMark = "<DatabaseConnectionError>";
                     errTypeEndMark = "</DatabaseConnectionError>";
-                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), additionalInfo));
+                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), FuncName, additionalInfo));
                     break;
                 case ERR_TYPES_SERVER.DATABASE_RETURN_ERROR:
                     errTypeStartMark = "<DatabaseReturnError>";
                     errTypeEndMark = "</DatabaseReturnError>";
-                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), additionalInfo));
+                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), FuncName, additionalInfo));
                     break;
                 case ERR_TYPES_SERVER.SERVER_CONNECTION_ERROR:
                     errTypeStartMark = "<ServerConnectionError>";
                     errTypeEndMark = "</ServerConnectionError>";
-                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), additionalInfo));
+                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), FuncName, additionalInfo));
                     break;
                 case ERR_TYPES_SERVER.SERVER_GUI_INTERACTION_ERROR:
                     errTypeStartMark = "<ServerGUIInteractionError>";
                     errTypeEndMark = "</ServerGUIInteractionError>";
-                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), additionalInfo));
+                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), FuncName, additionalInfo));
                     break;
                 case ERR_TYPES_SERVER.SERVER_GUI_LOGIN:
                     errTypeStartMark = "<ServerGUILogin>";
                     errTypeEndMark = "</ServerGUILogin>";
-                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), additionalInfo));
+                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), FuncName, additionalInfo));
                     break;
                 case ERR_TYPES_SERVER.SERVER_GUI_LOGOUT:
                     errTypeStartMark = "<ServerGUILogOut>";
                     errTypeEndMark = "</ServerGUILogOut>";
-                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), additionalInfo));
+                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), FuncName, additionalInfo));
                     break;
                 case ERR_TYPES_SERVER.SERVER_START:
                     errTypeStartMark = "<ServerStart>";
                     errTypeEndMark = "</ServerStart>";
-                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), additionalInfo));
+                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), FuncName, additionalInfo));
                     break;
                 case ERR_TYPES_SERVER.SERVER_STOP:
                     errTypeStartMark = "<ServerStop>";
                     errTypeEndMark = "</ServerStop>";
-                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), additionalInfo));
+                    ErrorsList.Add(new ErrContainerServer(errMsg, errLoggingLevel, errTypeStartMark, errTypeEndMark, DateTime.Now.ToString(), FuncName, additionalInfo));
                     break;
                 default:
                     break;

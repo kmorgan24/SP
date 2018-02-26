@@ -23,8 +23,8 @@ namespace ShopManager
     {
         private List<string> _notes;
         private List<LaborItem> _labor;
-        private Customer _customer;
-        private Car _car;
+        public Customer _customer;
+        public Car _car;
         private List<Date> _dates;
         
 
@@ -69,10 +69,11 @@ namespace ShopManager
 
         private void AddCustomerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Window win = new CustomerCreateOrSelectWindow(_customer, _car);
+            Window win = new CustomerCreateOrSelectWindow(this);
             win.ShowDialog();
             // this code waits for the dialog to close brfore continuing so it is safe to update display here
             // add code to display customer
+            
             CustomerName.Content = _customer.FName + " " + _customer.LName;
             CarInfo.Content = _car.Year + " " + _car.Make + " " + _car.Model;
         }

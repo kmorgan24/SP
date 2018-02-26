@@ -22,17 +22,19 @@ namespace ShopManager
     public partial class CarDisplay : UserControl
     {
         public Car _car;
-        public CarDisplay(Car car)
+        public CustomerCreateOrSelectWindow _parent;
+        public CarDisplay(Car car, CustomerCreateOrSelectWindow parent)
         {
             InitializeComponent();
             _car = car;
+            _parent = parent;
             YearMakeModel.Content = car.Year + " " + car.Make + " " + car.Model;
             Vin.Content = car.Vin;
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            CustomerCreateOrSelectWindow._car = this._car;
+            _parent._parent._car = this._car;
         }
     }
 }

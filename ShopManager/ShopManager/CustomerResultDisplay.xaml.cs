@@ -22,12 +22,22 @@ namespace ShopManager
     public partial class CustomerResultDisplay : UserControl
     {
         public Customer _cust;
-        public CustomerResultDisplay(Customer cust)
+        private CustomerCreateOrSelectWindow _parent;
+        public CustomerResultDisplay(Customer cust, CustomerCreateOrSelectWindow parent)
         {
             _cust = cust;
+            _parent = parent;
             InitializeComponent();
             CustomerName.Content = _cust.FName + " " + _cust.LName;
             CompanyName.Content = _cust.CompanyName;
+        }
+
+        private void Selectbtn_Click(object sender, RoutedEventArgs e)
+        {
+            _parent._parent._customer = _cust;
+            _parent.UpdateCars();
+            _parent.UpdateNumbers();
+            _parent.UpdateCustomerDisplay();
         }
     }
 }

@@ -245,3 +245,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+ShopManager/UserGuiAllErrors\.txt
+
+ShopManager/ServerAllErrors\.txt

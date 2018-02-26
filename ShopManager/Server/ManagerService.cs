@@ -38,7 +38,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "AddCar", e.Message);
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "AddPhoneNumber", e.Message);
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes","AddServiceAdvisor", e.Message);
                 }
             }
         }
@@ -115,7 +115,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "AddTechnician", e.Message);
                 }
             }
         }
@@ -194,7 +194,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "No Dates were included", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "No Dates were included", "CreateAppointmentFromClass", e.Message);
                     throw new InvalidOperationException("a date must be supplied");
                 }
                 try
@@ -216,7 +216,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "No Notes were included", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "No Notes were included", "CreateAppointmentFromClass", e.Message);
 
                 }
                 try
@@ -236,7 +236,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "No Labor items were included", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "No Labor items were included", "CreateAppointmentFromClass", e.Message);
                     throw new InvalidOperationException("a LaborItem must be supplied");
                 }
 
@@ -246,7 +246,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message + a);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "CreateAppointmentFromClass", e.Message + a);
                 }
 
             }
@@ -272,7 +272,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "CreateCustomer", e.Message);
                     return Rvalue;
                 }
                 Rvalue = c.Id;
@@ -298,7 +298,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "DeactivateUser", e.Message);
                 }
 
             }
@@ -319,12 +319,13 @@ namespace Server
             List<ShopManagerClasses.Appointment> apps = new List<ShopManagerClasses.Appointment>();
             using (var db = new mainEntities())
             {
+                string dateString = day.Date.ToString();
                 // select from dates table any dates that match
                 try
                 {
                     var tempApps =
                         from d in db.Dates
-                        where d.Date1 == day.ToString()
+                        where d.Date1 == dateString
                         select d;
 
                     foreach (var item in tempApps)
@@ -428,7 +429,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", "GetAppointments", e.Message);
 
                 }
 
@@ -534,7 +535,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", "GetUsers", e.Message);
                 }
 
             }
@@ -560,11 +561,12 @@ namespace Server
                     foreach (var item in cust)
                     {
                         ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
+                        results.Add(temp);
                     }
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", "SearchCustomerByCompanyName", e.Message);
                 }
                 return results;
             }
@@ -589,11 +591,12 @@ namespace Server
                     foreach (var item in cust)
                     {
                         ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
+                        results.Add(temp);
                     }
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", "SearchCustomerByFirstName", e.Message);
                 }
                 return results;
             }
@@ -618,11 +621,12 @@ namespace Server
                     foreach (var item in cust)
                     {
                         ShopManagerClasses.Customer temp = new ShopManagerClasses.Customer(item.Id, item.FName, item.LName, item.SpouseID, item.CompanyName);
+                        results.Add(temp);
                     }
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", "SearchCustomerByLastName", e.Message);
                 }
                 return results;
             }
@@ -661,7 +665,7 @@ namespace Server
                 }
                 catch (Exception e)
                 {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", e.Message);
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", "SearchCustomerByPhoneNumber", e.Message);
                 }
                 return results;
             }

@@ -30,11 +30,11 @@ namespace Server
             try
             {
                 startService();
-                _logger.WriteError(ERR_TYPES_SERVER.SERVER_START, LOGGING_LEVEL.INFO , "The Server Started");
+                _logger.WriteError(ERR_TYPES_SERVER.SERVER_START, LOGGING_LEVEL.INFO , "The Server Started", "");
             }
             catch (Exception e)
             {
-                _logger.WriteError(ERR_TYPES_SERVER.SERVER_START, LOGGING_LEVEL.FATAL_ERROR, "The service failed to start", e.Message);
+                _logger.WriteError(ERR_TYPES_SERVER.SERVER_START, LOGGING_LEVEL.FATAL_ERROR, "The service failed to start", "", e.Message);
                
             }
             

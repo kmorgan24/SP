@@ -13,8 +13,10 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
         <Label Name="CustomerName" Content="" Grid.Row="0"/>
         <Label Name="CompanyName" Content="" Grid.Row="1"/>
-        
+        <Button Name="Selectbtn" Content="Select" Grid.Row="2" Click="Selectbtn_Click"/>
+
     </Grid>
 </UserControl>

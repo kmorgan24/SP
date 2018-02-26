@@ -20,15 +20,13 @@ namespace ShopManager
     /// </summary>
     public partial class CustomerCreateOrSelectWindow : Window
     {
-        private Customer _customer;
-        public static Car _car;
+        public CreateAppointmentWindow _parent;
         
         private List<Car> CarsList;
         private List<PhoneNumber> PhoneList;
-        public CustomerCreateOrSelectWindow(Customer cust, Car car)
+        public CustomerCreateOrSelectWindow(CreateAppointmentWindow parent)
         {
-            _customer = cust;
-            _car = car;
+            _parent = parent;
             InitializeComponent();
 
             CarsList = new List<Car>();
@@ -98,30 +96,30 @@ namespace ShopManager
             foreach (Customer item in resultsList)
             {
                 // add a display object to the stackpan
-                ResultsPanel.Children.Add(new CustomerResultDisplay(item));
+                ResultsPanel.Children.Add(new CustomerResultDisplay(item, this));
             }
         }
 
         private void AddPhoneBtn_Click(object sender, RoutedEventArgs e)
         {
-            Window win = new AddPhoneNumberWindow(_customer.Id);
+            Window win = new AddPhoneNumberWindow(_parent._customer.Id);
             win.ShowDialog();
             UpdateNumbers();
         }
 
         private void SaveAndContinueBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (_customer == null || _car == null)
+            if (_parent._customer == null || _parent._car == null)
             {
                 // display warning some day
             }
             else
             {
-                if (_customer.Id == -1) // it was never set
+                if (_parent._customer.Id == -1) // it was never set
                 {
                     if (FNameEditBox.Text != "")
                     {
-                        _customer.FName = FNameEditBox.Text;
+                        _parent._customer.FName = FNameEditBox.Text;
                     }
                     else
                     {
@@ -129,16 +127,16 @@ namespace ShopManager
                     }
                     if (LNameEditBox.Text != "")
                     {
-                        _customer.LName = LNameEditBox.Text;
+                        _parent._customer.LName = LNameEditBox.Text;
                     }
                     else
                     {
                         //error
                     }
-                    _customer.CompanyName = CompanyNameEditBox.Text;
+                    _parent._customer.CompanyName = CompanyNameEditBox.Text;
 
 
-                    _customer.Id = MainWindow.AppServer.CreateCustomer(_customer.CompanyName, _customer.FName, _customer.LName, _customer.SpouseID);
+                    _parent._customer.Id = MainWindow.AppServer.CreateCustomer(_parent._customer.CompanyName, _parent._customer.FName, _parent._customer.LName, _parent._customer.SpouseID);
                     
                 }
                 else
@@ -151,29 +149,36 @@ namespace ShopManager
 
         private void AddCar_Click(object sender, RoutedEventArgs e)
         {
-            Window win = new AddCarWindow(_customer.Id);
+            Window win = new AddCarWindow(_parent._customer.Id);
             win.ShowDialog();
             UpdateCars();
         }
 
-        private void UpdateCars()
+        public void UpdateCars()
         {
-            CarsList = MainWindow.AppServer.GetCarsByCustomerID(_customer.Id);
+            CarsList = MainWindow.AppServer.GetCarsByCustomerID(_parent._customer.Id);
+            CarStackpanel.Children.Clear();
             foreach (Car item in CarsList)
             {
-                CarStackpanel.Children.Add(new CarDisplay(item));
+                CarStackpanel.Children.Add(new CarDisplay(item, this));
             }
         }
 
-        private void UpdateNumbers()
+        public void UpdateNumbers()
         {
-            PhoneList = MainWindow.AppServer.GetCustomerPhoneNumbersByCustomerID(_customer.Id);
+            PhoneList = MainWindow.AppServer.GetCustomerPhoneNumbersByCustomerID(_parent._customer.Id);
             foreach (PhoneNumber item in PhoneList)
             {
                 TextBlock temp = new TextBlock();
                 temp.Text = item.Number;
                 PhoneNumberDisplay.Children.Add(temp);
             }
+        }
+        public void UpdateCustomerDisplay()
+        {
+            FNameEditBox.Text = _parent._customer.FName;
+            LNameEditBox.Text = _parent._customer.LName;
+            CompanyNameEditBox.Text = _parent._customer.CompanyName;
         }
     }
 }
