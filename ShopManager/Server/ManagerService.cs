@@ -560,8 +560,8 @@ namespace Server
                 hours = 1;
             }
 
-            //return hours;
-            return 16;
+            return hours;
+            //return 16;
         }
 
         public List<ShopManagerClasses.User> GetUsers()
