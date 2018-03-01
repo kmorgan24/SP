@@ -20,15 +20,14 @@ namespace ShopManager
     /// </summary>
     public partial class AddLaborItemWindow : Window
     {
-        private List<LaborItem> _labor;
+        private CreateAppointmentWindow _parent;
         private List<int> HoursList;
 
-        public AddLaborItemWindow(List<LaborItem> _labor)
+        public AddLaborItemWindow(Window parent)
         {
             InitializeComponent();
-            HoursList = new List<int>();
-            this._labor = _labor;
-            
+            _parent = parent as CreateAppointmentWindow;
+            HoursList = new List<int>();           
             for (int i = 0; i < 75; i++)
             {
                 HoursList.Add(i);
@@ -54,7 +53,7 @@ namespace ShopManager
            // double decVal = double.Parse((string)listBox2.SelectedValue);
             //double temp = (int)listBox.SelectedValue + decVal;
             l.Hours = (int)listBox.SelectedValue;
-            _labor.Add(l);
+            _parent._labor.Add(l);
             Close();
         }
     }

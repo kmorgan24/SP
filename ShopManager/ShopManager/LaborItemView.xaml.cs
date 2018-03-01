@@ -30,8 +30,11 @@ namespace ShopManager
 
         public LaborItemView(LaborItem item)
         {
+            InitializeComponent();
             this.item = item;
-
+            ShortDescBox.Text = item.Description;
+            LongDescBox.Text = item.LongDescription;
+            HoursBox.Content = item.Hours.ToString();
         }
     }
 }

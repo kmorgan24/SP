@@ -187,7 +187,7 @@ namespace Server
                             Id = db.Dates.Count() + 1,
                             Date1 = item.Date1,
                             Hours = item.Hours,
-                            AppointmentID = item.AppointmentID
+                            AppointmentID = app.Id
                         };
                         db.Dates.Add(d);
                     }

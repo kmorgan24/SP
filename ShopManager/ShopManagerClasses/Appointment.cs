@@ -36,7 +36,7 @@ namespace ShopManagerClasses
             this._customer = _customer;
             this._car = _car;
             Labor = _labor;
-
+            Notes = new List<Note>();
             Dates = _dates;
             // construct a list of notes from the string list notes
             foreach (var item in _notes)

@@ -1,20 +1,21 @@
-﻿<UserControl x:Class="ShopManager.LaborItemView"
+﻿<UserControl x:Class="ShopManager.DateSelectorDisplay"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShopManager"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+             d:DesignHeight="100" d:DesignWidth="100">
+    <Grid MouseDown="Grid_MouseDown" MinWidth="110">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Name="ShortDescBox" MinWidth="75" IsReadOnly="True"/>
-        <TextBox Name="LongDescBox" MinWidth="75" IsReadOnly="True" Grid.Row="1"/>
-        <Label Name="HoursBox" Grid.Row="2"/>
+        <Label Name="DayLabel" Content="Day" HorizontalAlignment="Center"/>
+        <Label Name="DateLabel" Content="Date" Grid.Row="1" HorizontalAlignment="Center"/>
+        <ProgressBar Name="HoursBar" Maximum="100" Value="50" Grid.Row="2" HorizontalAlignment="Center" Foreground="Green" MinWidth="100"/>
+        <Label Name="HoursLabel" Content="RemainingHours" Grid.Row="3" HorizontalAlignment="Center"/>
     </Grid>
 </UserControl>

@@ -22,10 +22,10 @@ namespace ShopManager
     public partial class CreateAppointmentWindow : Window
     {
         private List<string> _notes;
-        private List<LaborItem> _labor;
+        public List<LaborItem> _labor;
         public Customer _customer;
         public Car _car;
-        private List<Date> _dates;
+        public List<Date> _dates;
         
 
         public CreateAppointmentWindow()
@@ -36,7 +36,11 @@ namespace ShopManager
             _customer = new Customer();
             _car = new Car();
             _dates = new List<Date>();
-            
+            DateSelectorPanel.Orientation = Orientation.Horizontal;
+            for (int i = 0; i < 5; i++)
+            {
+                DateSelectorPanel.Children.Add(new DateSelectorDisplay(this, DateTime.Now.AddDays(i), 16, i*2));
+            }
         }
         
 
@@ -62,7 +66,7 @@ namespace ShopManager
 
         private void AddLaborItemBtn_Click(object sender, RoutedEventArgs e)
         {
-            Window win = new AddLaborItemWindow(_labor);
+            Window win = new AddLaborItemWindow(this);
             win.ShowDialog();
             UpdateUI();     //that seems to work as intended for now (ChangeLater)
         }
@@ -93,6 +97,10 @@ namespace ShopManager
 
         private void Savebtn_Click(object sender, RoutedEventArgs e)
         {
+            foreach (TextBox item in NotesListBox.Children)
+            {
+                _notes.Add(item.Text);
+            }
             Appointment a = new Appointment(_customer, _car, _labor, _notes, _dates );
             //Send to server
             try
