@@ -39,7 +39,7 @@ namespace ShopManager
             DateSelectorPanel.Orientation = Orientation.Horizontal;
             for (int i = 0; i < 5; i++)
             {
-                DateSelectorPanel.Children.Add(new DateSelectorDisplay(this, DateTime.Now.AddDays(i), 16, i*2));
+                DateSelectorPanel.Children.Add(new DateSelectorDisplay(this, DateTime.Now.AddDays(i), MainWindow.AppServer.GetMaxHours(), MainWindow.AppServer.GetCurrentHours(DateTime.Now.AddDays(i))));
             }
         }
         
@@ -83,10 +83,16 @@ namespace ShopManager
         }
         private void UpdateUI()
         {
+            int hours = 0;
             LaborItemsListBox.Children.Clear();
             foreach (LaborItem item in _labor)
             {
                 LaborItemsListBox.Children.Add(new LaborItemView(item));
+                hours += (int)item.Hours;
+            }
+            foreach (DateSelectorDisplay item in DateSelectorPanel.Children)
+            {
+                item.ShowWithHours(hours);
             }
         }
 

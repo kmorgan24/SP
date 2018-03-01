@@ -19,9 +19,9 @@
 
         </Grid.ColumnDefinitions>
         <ProgressBar Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Stretch"  MinWidth="100" MinHeight="15"/>
-        <Button x:Name="button" Content="-" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="1" Width="30"/>
-        <Button x:Name="button2" Content="+" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.Row="1" Grid.Column="2" Width="30"/>
-        <Label x:Name="label" Content="Label" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <Button x:Name="minus" Content="-" HorizontalAlignment="Right" VerticalAlignment="Stretch" Grid.Row="1" Width="30" Click="minus_Click"/>
+        <Button x:Name="plus" Content="+" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Width="30" Height="30" Margin="0,0.4,0,0" Click="plus_Click"/>
+        <Label x:Name="labelDay" Content="Label" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <StackPanel Name="AppointmentStack" Grid.ColumnSpan="3" Grid.Row="2"/>
 
     </Grid>

@@ -482,6 +482,33 @@ namespace Server
             return RCars;
         }
 
+        public int GetCurrentHours(DateTime dateTime)
+        {
+            int hours = 0;
+            string searchS = dateTime.Date.ToString();
+            using (var db = new mainEntities())
+            {
+                try
+                {
+                    var days =
+                        from d in db.Dates
+                        where d.Date1 == searchS
+                        select d;
+                    foreach (var item in days)
+                    {
+                        hours += (int)item.Hours;
+                    }
+                }
+                catch (Exception)
+                {
+
+                }
+
+            }
+
+            return hours;
+        }
+
         public List<ShopManagerClasses.PhoneNumber> GetCustomerPhoneNumbersByCustomerID(long id)
         {
             List<ShopManagerClasses.PhoneNumber> RPhoneNumber = new List<ShopManagerClasses.PhoneNumber>();
@@ -503,6 +530,38 @@ namespace Server
             }
 
             return RPhoneNumber;
+        }
+
+        public int GetMaxHours()
+        {
+            int hours = 0;
+            using (var db = new mainEntities())
+            {
+                try
+                {
+                    var users =
+                        from u in db.Users
+                        where u.Active == 1
+                        select u;
+                    foreach (var item in users)
+                    {
+                        hours += (int)item.TargetHours;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    hours = 1;
+                }
+
+            }
+            if (hours == 0)
+            {
+                hours = 1;
+            }
+
+            //return hours;
+            return 16;
         }
 
         public List<ShopManagerClasses.User> GetUsers()
@@ -550,6 +609,7 @@ namespace Server
                 }
 
             }
+           
             return RUsers;
         }
 

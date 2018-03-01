@@ -42,6 +42,12 @@ namespace Server
         List<ShopManagerClasses.Customer> SearchCustomerByLastName(string text);
 
         [OperationContract]
+        int GetCurrentHours(DateTime dateTime);
+
+        [OperationContract]
+        int GetMaxHours();
+
+        [OperationContract]
         void AddCar(long _customer, ShopManagerClasses.Car temp);
 
         [OperationContract]

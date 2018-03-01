@@ -58,6 +58,7 @@ namespace ShopManager
         {
             this.HoursToShow = HoursToShow;
             HoursBar.Value = CurrentHours + HoursToShow;
+            HoursLabel.Content = (CurrentHours + HoursToShow);
             if ((CurrentHours + HoursToShow) / MaxHours < .75)
             {
                 HoursBar.Foreground = Brushes.Green;

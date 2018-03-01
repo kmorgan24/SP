@@ -37,7 +37,7 @@ namespace ShopManager
             double hours = 0;
             foreach (var day in item.Dates)
             {
-                if (day.Date1 == dispDay.ToString())
+                if (day.Date1 == dispDay.Date.ToString())
                 {
                     hours += day.Hours;
                 }

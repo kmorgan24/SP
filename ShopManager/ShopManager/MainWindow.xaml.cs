@@ -98,7 +98,7 @@ namespace ShopManager
 
             CurrentView = CurrentViewTypes.Day;
             BottomGrid.Children.Clear();
-            AppointmentList = AppServer.GetAppointments(DateTime.Now);
+            AppointmentList = AppServer.GetAppointments(CurrentWorkingDate);
             BottomGrid.Children.Add(new DayView());
         }
 
