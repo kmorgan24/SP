@@ -32,7 +32,7 @@ namespace ShopManager
         public static IManagerService AppServer;
         private static ChannelFactory<IManagerService> _channel;
 
-        public static long IndexOfSelectedAppointment;
+        public static int IndexOfSelectedAppointment;
         public static CurrentViewTypes CurrentView;
         public static DateTime CurrentWorkingDate;
 
@@ -86,7 +86,8 @@ namespace ShopManager
             CurrentView = CurrentViewTypes.Single;
 
             BottomGrid.Children.Clear();
-            BottomGrid.Children.Add(new SingleView());
+            IndexOfSelectedAppointment = 0;
+            BottomGrid.Children.Add(new SingleView(0));
         }
 
         private void btnDayView_Click(object sender, RoutedEventArgs e)
@@ -97,6 +98,7 @@ namespace ShopManager
 
             CurrentView = CurrentViewTypes.Day;
             BottomGrid.Children.Clear();
+            AppointmentList = AppServer.GetAppointments(DateTime.Now);
             BottomGrid.Children.Add(new DayView());
         }
 

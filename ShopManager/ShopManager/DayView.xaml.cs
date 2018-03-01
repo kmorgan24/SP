@@ -33,7 +33,7 @@ namespace ShopManager
                 }
                 catch (Exception ex)
                 {
-                    UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_UNABLE_TO_READWRITE, ex.Message, "Could Not add appointment to appointmetn stack" + item);                   
+                    UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_UNABLE_TO_READWRITE, ex.Message, "Could Not add appointment to appointment stack" + item);                   
                 }
                 
             }

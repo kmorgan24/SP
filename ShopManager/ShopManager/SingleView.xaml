@@ -22,12 +22,12 @@
         </Grid.ColumnDefinitions>
         <Button Name="btnBack" Content="-" Grid.Row="0" MinWidth="50" MaxWidth="75" HorizontalAlignment="Left" Click="btnBack_Click"/>
         <Button Name="btnFoward" Content="+" Grid.Row="0" Grid.Column="1" MinWidth="50" MaxWidth="75" HorizontalAlignment="Right" Click="btnFoward_Click"/>
-        <Label x:Name="label" Content="Name:" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="label1" Content="Phone:" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="label2" Content="Year:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="label3" Content="Make:" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="label4" Content="Model:" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Label x:Name="label5" Content="Hours:" Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelName" Content="Name: " Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelPhone" Content="Phone: " Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelYear" Content="Year: " Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelMake" Content="Make: " Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelModel" Content="Model: " Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label x:Name="labelHours" Content="Hours: " Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         
         <ScrollViewer Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2">
             <StackPanel Name="ProblemDescriptions">
