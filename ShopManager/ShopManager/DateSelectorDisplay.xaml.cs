@@ -45,7 +45,7 @@ namespace ShopManager
             {
                 HoursBar.Foreground = Brushes.Green;
             }
-            else if (CurrentHours / MaxHours > .75)
+            else if ((CurrentHours + HoursToShow) / MaxHours < .99)
             {
                 HoursBar.Foreground = Brushes.Yellow;
             }
@@ -63,7 +63,7 @@ namespace ShopManager
             {
                 HoursBar.Foreground = Brushes.Green;
             }
-            else if ((CurrentHours + HoursToShow) / MaxHours > .75)
+            else if ((CurrentHours + HoursToShow) / MaxHours < .99)
             {
                 HoursBar.Foreground = Brushes.Yellow;
             }

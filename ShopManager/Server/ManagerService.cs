@@ -609,8 +609,15 @@ namespace Server
                 }
 
             }
-           
-            return RUsers;
+            try
+            {
+                return RUsers;
+            }
+            catch (Exception)
+            {
+                return new List<ShopManagerClasses.User>();
+            }
+
         }
 
         /// <summary>

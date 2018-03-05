@@ -30,7 +30,15 @@ namespace ShopManager
             radioButtonUser.IsChecked = true;
             isSelectedTech = false;
             radioButtonSk4.IsChecked = true;
-            _users = MainWindow.AppServer.GetUsers();
+            try
+            {
+                _users = MainWindow.AppServer.GetUsers();
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
 
         private void Addbtn_Click(object sender, RoutedEventArgs e)
