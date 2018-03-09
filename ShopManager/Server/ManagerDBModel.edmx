@@ -67,6 +67,7 @@
           <Property Name="Hours" Type="integer" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="Complete" Type="integer" Nullable="false" />
+          <Property Name="LongDescription" Type="nvarchar" MaxLength="2147483647" />
         </EntityType>
         <EntityType Name="Notes">
           <Key>
@@ -137,6 +138,7 @@
           <Property Name="Id" Type="integer" Nullable="false" />
           <Property Name="AppointmentID" Type="integer" Nullable="false" />
           <Property Name="TechnicianID" Type="integer" Nullable="false" />
+          <Property Name="Complete" Type="integer" />
         </EntityType>
         <EntityContainer Name="mainModelStoreContainer">
           <EntitySet Name="Address" EntityType="Self.Address" store:Type="Tables" />
@@ -219,6 +221,7 @@
           <Property Name="Hours" Type="Int64" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Complete" Type="Int64" Nullable="false" />
+          <Property Name="LongDescription" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Note">
           <Key>
@@ -289,6 +292,7 @@
           <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="AppointmentID" Type="Int64" Nullable="false" />
           <Property Name="TechnicianID" Type="Int64" Nullable="false" />
+          <Property Name="Complete" Type="Int64" />
         </EntityType>
         <EntityContainer Name="mainEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Addresses" EntityType="Self.Address" />
@@ -372,6 +376,7 @@
           <EntitySetMapping Name="Labors">
             <EntityTypeMapping TypeName="mainModel.Labor">
               <MappingFragment StoreEntitySet="Labor">
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
                 <ScalarProperty Name="Hours" ColumnName="Hours" />
@@ -451,6 +456,7 @@
           <EntitySetMapping Name="WorkOrders">
             <EntityTypeMapping TypeName="mainModel.WorkOrder">
               <MappingFragment StoreEntitySet="WorkOrder">
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
                 <ScalarProperty Name="TechnicianID" ColumnName="TechnicianID" />

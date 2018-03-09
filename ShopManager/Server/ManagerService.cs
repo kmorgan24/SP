@@ -229,6 +229,7 @@ namespace Server
                             AppointmentID = app.Id,
                             Complete = 0,
                             Description = item.Description,
+                            LongDescription = item.LongDescription,
                             Hours = (long)item.Hours    // this needs changed on the DB to support tenths of an hour
                         };
                         db.Labors.Add(l);

@@ -114,11 +114,20 @@
     <Compile Include="LaborItemView.xaml.cs">
       <DependentUpon>LaborItemView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ServiceAdvisorWindow.xaml.cs">
+      <DependentUpon>ServiceAdvisorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="SingleView.xaml.cs">
       <DependentUpon>SingleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TechAssignedWorkDisplay.xaml.cs">
+      <DependentUpon>TechAssignedWorkDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkOrderListingDisplay.xaml.cs">
+      <DependentUpon>WorkOrderListingDisplay.xaml</DependentUpon>
     </Compile>
     <Page Include="AddCarWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -176,11 +185,23 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ServiceAdvisorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SettingsWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SingleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TechAssignedWorkDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WorkOrderListingDisplay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

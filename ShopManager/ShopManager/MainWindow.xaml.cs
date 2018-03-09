@@ -122,5 +122,11 @@ namespace ShopManager
             UserErrorLogger.GetInstance().WriteError(ERR_TYPES.USER_GUI_LOGOUT, "Program Closed");
             UserErrorLogger.GetInstance().ForceWrite();
         }
+
+        private void btnOrdersView_Click(object sender, RoutedEventArgs e)
+        {
+            Window win = new ServiceAdvisorWindow();
+            win.Show();
+        }
     }
 }

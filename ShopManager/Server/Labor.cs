@@ -19,5 +19,6 @@ namespace Server
         public long Hours { get; set; }
         public string Description { get; set; }
         public long Complete { get; set; }
+        public string LongDescription { get; set; }
     }
 }

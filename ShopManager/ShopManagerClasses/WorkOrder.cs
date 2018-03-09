@@ -15,7 +15,7 @@ namespace ShopManagerClasses
 
         public override string ToString()
         {
-            string temp = Environment.NewLine + "Object Address";
+            string temp = Environment.NewLine + "Object WorkOrder";
             temp += Environment.NewLine + "Id" + Id;
             temp += Environment.NewLine + "AppointmentID=" + AppointmentID;
             temp += Environment.NewLine + "TechnicianID=" + TechnicianID;
