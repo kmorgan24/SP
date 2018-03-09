@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="ShopManager.TechHoursAssignmentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShopManager"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="75*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Label Name="TechNameLabel" Content="Tech Name" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ProgressBar Name="HoursProgressBar" Grid.Row="1" MaxHeight="25" MaxWidth="250"/>
+        <Label Name="HoursLabel" Content="000 of 000" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"/>
+        <ScrollViewer Grid.Row="3">
+            <StackPanel Name="AssignedJobsStack"/>
+        </ScrollViewer>
+        <Button Name="SelectBtn" Grid.Row="4" Click="SelectBtn_Click" Content="Select" MaxHeight="45" MaxWidth="250"/>
+    </Grid>
+</UserControl>
