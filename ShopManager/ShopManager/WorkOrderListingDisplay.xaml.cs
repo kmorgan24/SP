@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ShopManagerClasses;
 
 namespace ShopManager
 {
@@ -23,6 +24,19 @@ namespace ShopManager
         public WorkOrderListingDisplay()
         {
             InitializeComponent();
+        }
+        public WorkOrderListingDisplay(Appointment app, int complete, int total, double hours)
+        {
+            InitializeComponent();
+            NameLabel.Content = app._customer.FName +" " + app._customer.LName;
+            CarLabel.Content = app._car.Year + " " + app._car.Make + " " + app._car.Model;
+            CompletenessLabel.Content = complete + " of " + total;
+            HoursLabel.Content = hours;
+            JobStatusLabel.Content = "In Progress";
+            foreach (var item in app.Labor)
+            {
+                LaborDescriptionsBox.Text += item.Description + Environment.NewLine;
+            }
         }
     }
 }

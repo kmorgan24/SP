@@ -25,7 +25,8 @@ namespace Server
 
         [OperationContract]
         List<ShopManagerClasses.Appointment> GetAppointments(DateTime start);
-
+        [OperationContract]
+        List<ShopManagerClasses.WorkOrder> GetAssignedJobs(long userID);
         [OperationContract]
         List<ShopManagerClasses.User> GetUsers();
 

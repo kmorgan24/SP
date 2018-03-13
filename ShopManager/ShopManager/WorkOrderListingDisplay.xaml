@@ -34,7 +34,7 @@
         <TextBox Name="LaborDescriptionsBox" IsReadOnly="True" Grid.Row="7" Grid.ColumnSpan="2" MaxHeight="90"/>
 
         <Label Content="Labor Items Completed:" Grid.Row="0" Grid.Column="1"/>
-        <Label Name="Label" Content="000 of 000" FontSize="20" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Label Name="CompletenessLabel" Content="000 of 000" FontSize="20" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
         <Label Content="Job Status:" Grid.Row="4" Grid.Column="1"/>
         <Label Name="JobStatusLabel" Content="Job Status" Grid.Row="5" Grid.Column="1"/>

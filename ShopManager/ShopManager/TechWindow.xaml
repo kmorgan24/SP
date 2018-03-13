@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ShopManager"
         mc:Ignorable="d"
-        Title="TechWindow" Height="300" Width="300">
+        Title="TechWindow" Height="800" Width="1000">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Label Content="New" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+        <Label Content="In Progress" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+        <Label Content="Complete" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+
+        <ScrollViewer Grid.Column="0" Grid.Row="1">
+            <StackPanel Name="NewJobsStack"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="1" Grid.Row="1">
+            <StackPanel Name="IPJobsStack"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="2" Grid.Row="1">
+            <StackPanel Name="CompleteJobsStack"/>
+        </ScrollViewer>
     </Grid>
 </Window>

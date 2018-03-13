@@ -128,5 +128,16 @@ namespace ShopManager
             Window win = new ServiceAdvisorWindow();
             win.Show();
         }
+
+        private void btnSAView_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnTechView_Click(object sender, RoutedEventArgs e)
+        {
+            Window win = new TechWindow(2);
+            win.Show();
+        }
     }
 }

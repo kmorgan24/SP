@@ -93,6 +93,9 @@
     <Compile Include="AppointmentDisplay.xaml.cs">
       <DependentUpon>AppointmentDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AssignWorkWindow.xaml.cs">
+      <DependentUpon>AssignWorkWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CarDisplay.xaml.cs">
       <DependentUpon>CarDisplay.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,12 @@
     <Compile Include="TechAssignedWorkDisplay.xaml.cs">
       <DependentUpon>TechAssignedWorkDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TechHoursAssignmentView.xaml.cs">
+      <DependentUpon>TechHoursAssignmentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TechWindow.xaml.cs">
+      <DependentUpon>TechWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WorkOrderListingDisplay.xaml.cs">
       <DependentUpon>WorkOrderListingDisplay.xaml</DependentUpon>
     </Compile>
@@ -142,6 +151,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="AppointmentDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AssignWorkWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -198,6 +211,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TechAssignedWorkDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TechHoursAssignmentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TechWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

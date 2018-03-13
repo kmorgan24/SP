@@ -456,6 +456,143 @@ namespace Server
             return apps;
         }
 
+        public List<ShopManagerClasses.WorkOrder> GetAssignedJobs(long userID)
+        {
+            List<ShopManagerClasses.WorkOrder> Jobs = new List<ShopManagerClasses.WorkOrder>();
+
+            using (var db = new mainEntities())
+            {
+                var orders =
+                    from o in db.WorkOrders
+                    where o.TechnicianID == userID
+                    select o;
+                foreach (var item in orders)
+                {
+                    ShopManagerClasses.WorkOrder temp = new ShopManagerClasses.WorkOrder(GetAppointmentByID(item.AppointmentID), item.Id, item.TechnicianID, item.Complete == 0 ? false : true);
+                    Jobs.Add(temp);
+                }
+            }
+
+
+            return Jobs;
+        }
+
+        private ShopManagerClasses.Appointment GetAppointmentByID(long appointmentID)
+        {
+            var temp = new ShopManagerClasses.Appointment();
+            try
+            {
+
+                using (var db = new mainEntities())
+                {
+
+
+
+                    temp.Id = appointmentID;
+                    // select the list of dates with matching appointment ids
+                    List<ShopManagerClasses.Date> dates = new List<ShopManagerClasses.Date>();
+                    var tempDates =
+                        from d in db.Dates
+                        where d.AppointmentID == appointmentID
+                        select d;
+                    foreach (var tempdateitem in tempDates)
+                    {
+                        var tempSDate = new ShopManagerClasses.Date();
+                        tempSDate.AppointmentID = tempdateitem.AppointmentID;
+                        tempSDate.Date1 = tempdateitem.Date1;
+                        tempSDate.Hours = tempdateitem.Hours;
+                        tempSDate.Id = tempdateitem.Id;
+                        dates.Add(tempSDate);
+                    }
+                    temp.Dates = dates;
+                    // select the list of labor items with matching appointment ids
+                    List<ShopManagerClasses.LaborItem> labor = new List<ShopManagerClasses.LaborItem>();
+                    var tempLaborItems =
+                         from l in db.Labors
+                         where l.AppointmentID == appointmentID
+                         select l;
+                    foreach (var tempLaborItem in tempLaborItems)
+                    {
+                        var tempSLabor = new ShopManagerClasses.LaborItem();
+                        tempSLabor.AppointmentID = temp.Id;
+                        tempSLabor.Id = tempLaborItem.Id;
+                        tempSLabor.Complete = (tempLaborItem.Complete == 0) ? false : true;
+                        tempSLabor.Description = tempLaborItem.Description;
+                        tempSLabor.LongDescription = "Not Yet implimented on DB";
+                        tempSLabor.Hours = tempLaborItem.Hours;
+                        labor.Add(tempSLabor);
+                    }
+                    temp.Labor = labor;
+                    // select the list of notes with matching ids
+                    List<ShopManagerClasses.Note> notes = new List<ShopManagerClasses.Note>();
+                    var tempNotes =
+                         from n in db.Notes
+                         where n.AppointmentID == temp.Id
+                         select n;
+                    foreach (var tempNoteItem in tempNotes)
+                    {
+                        var tempSNote = new ShopManagerClasses.Note();
+                        tempSNote.Active = tempNoteItem.Active;
+                        tempSNote.AppointmentID = tempNoteItem.AppointmentID;
+                        tempSNote.CarID = tempNoteItem.CarID;
+                        tempSNote.CustomerID = tempNoteItem.CustomerID;
+                        tempSNote.Description = tempNoteItem.Description;
+                        tempSNote.Id = tempNoteItem.Id;
+                        tempSNote.Visible = tempNoteItem.Visible;
+                        notes.Add(tempSNote);
+                    }
+                    temp.Notes = notes;
+                    var tempAppointment =
+                        from a in db.Appointments
+                        where a.Id == temp.Id
+                        select a;
+                    Appointment tempapp = tempAppointment.First();
+
+                    // select the car that is associated
+                    var tempCar =
+                         from c in db.Cars
+                         where c.Id == tempapp.CarID
+                         select c;
+                    Car car = tempCar.First();
+                    ShopManagerClasses.Car tempSCar = new ShopManagerClasses.Car();
+                    tempSCar.Id = car.Id;
+                    tempSCar.Make = car.Make;
+                    tempSCar.Model = car.Model;
+                    tempSCar.Owner = car.Owner;
+                    tempSCar.Plate = car.Plate;
+                    tempSCar.ProdDate = car.ProdDate;
+                    tempSCar.State = car.State;
+                    tempSCar.Vin = car.Vin;
+                    tempSCar.Year = car.Year;
+
+                    temp._car = tempSCar;
+                    // select the customer that is associated
+                    var tempCustomer =
+                         from c in db.Customers
+                         where c.Id == tempapp.CustomerID
+                         select c;
+                    Customer cust = tempCustomer.First();
+                    ShopManagerClasses.Customer tempSCustomer = new ShopManagerClasses.Customer();
+                    tempSCustomer.CompanyName = cust.CompanyName;
+                    tempSCustomer.FName = cust.FName;
+                    tempSCustomer.Id = cust.Id;
+                    tempSCustomer.LName = cust.LName;
+                    tempSCustomer.SpouseID = cust.SpouseID;
+
+                    temp._customer = tempSCustomer;
+
+
+                }
+            }
+            catch (Exception ei)
+            {
+                ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", "GetAppointments", ei.Message);
+
+            }
+            return temp;
+        }
+        
+
         public List<ShopManagerClasses.Car> GetCarsByCustomerID(long id)
         {
             List<ShopManagerClasses.Car> RCars = new List<ShopManagerClasses.Car>();

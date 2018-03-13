@@ -50,7 +50,10 @@
             <Button Name="btnCreateNew" Content="New Appointment" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnCreateNew_Click"/>
             <Button Name="btnConvertToOrder" Content="Convert to Order" Grid.Column="5" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             <Button Name="btnOrdersView" Content="Orders" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnOrdersView_Click"/>
-            
+
+            <Button Name="btnSAView" Content="SA View" Grid.Column="7" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnSAView_Click"/>
+            <Button Name="btnTechView" Content="Tech View" Grid.Column="8" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnTechView_Click"/>
+
             <Button Name="btnSettings" Content="Settings" Grid.Column="10" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnSettings_Click"/>
             
             

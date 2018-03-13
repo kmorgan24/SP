@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShopManagerClasses
 {
+    [Serializable]
     public class Appointment
     {
 
@@ -20,6 +21,7 @@ namespace ShopManagerClasses
         public Customer _customer;
         public Car _car;
 
+        
 
         // a date has the number of hours that will be taken up inside of it
         public Appointment()
