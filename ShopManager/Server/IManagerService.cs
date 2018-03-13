@@ -41,6 +41,9 @@ namespace Server
         List<ShopManagerClasses.Customer> SearchCustomerByCompanyName(string text);
 
         [OperationContract]
+        void AssignJob(long techID, long orderID);
+
+        [OperationContract]
         List<ShopManagerClasses.Customer> SearchCustomerByPhoneNumber(string text);
 
         [OperationContract]
@@ -78,5 +81,13 @@ namespace Server
 
         [OperationContract]
         void DeactivateUser(long selectedUserID);
+
+        [OperationContract]
+        void MarkOrderComplete(long idofSelected);
+
+        [OperationContract]
+        void ConvertToOrder(long AppointmentID);
+
+
     }
 }

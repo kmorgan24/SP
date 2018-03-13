@@ -57,14 +57,14 @@ namespace ShopManager
                 {
                     Button b = new Button();
                     b.Click += ItemBtn_Click;
-                    b.Content = new WorkOrderListingDisplay(item.app, completeCount, totalCount, hours);
+                    b.Content = new WorkOrderListingDisplay(item.app, item.Id, completeCount, totalCount, hours);
                     UnassignedStackPanel.Children.Add(b);
                 }
                 else if (totalCount == completeCount && completeCount != 0)
                 {
                     Button b = new Button();
                     b.Click += ItemBtn_Click;
-                    b.Content = new WorkOrderListingDisplay(item.app, completeCount, totalCount, hours);
+                    b.Content = new WorkOrderListingDisplay(item.app, item.Id, completeCount, totalCount, hours);
                     CompletedStackPanel.Children.Add(b);
                 }
                 else
@@ -94,12 +94,30 @@ namespace ShopManager
 
         private void AssignJobsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (IDofSelected != -1)
+            {
+                double temp = 0;
+                foreach (var item in Orders)
+                {
+                    if (item.Id == IDofSelected)
+                    {
+                        foreach (var item2 in item.app.Labor)
+                        {
+                            temp += item2.Hours;
+                        }
+                    }
+                }
+                Window win = new AssignWorkWindow(IDofSelected, temp, Users);
+                win.ShowDialog();
+            }
         }
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (IDofSelected != -1)
+            {
+                MainWindow.AppServer.MarkOrderComplete(IDofSelected);
+            }
         }
 
         private void AutoAssignJobsBtn_Click(object sender, RoutedEventArgs e)
@@ -110,7 +128,7 @@ namespace ShopManager
         {
             Button b = sender as Button;
             WorkOrderListingDisplay w = b.Content as WorkOrderListingDisplay;
-            IDofSelected = w.App.Id;
+            IDofSelected = w.OrderID;
         }
     }
 }

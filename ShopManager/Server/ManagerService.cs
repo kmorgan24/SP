@@ -941,5 +941,61 @@ namespace Server
 
             return Jobs;
         }
+
+        public void MarkOrderComplete(long idofSelected)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AssignJob(long techID, long orderID)
+        {
+            using (var db = new mainEntities())
+            {
+                var order =
+                    from o in db.WorkOrders
+                    where o.Id == orderID
+                    select o;
+                try
+                {
+                    order.First().TechnicianID = techID;
+                }
+                catch (Exception)
+                {
+
+                }
+                
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        public void ConvertToOrder(long AppointmentID)
+        {
+            using (var db = new mainEntities())
+            {
+                WorkOrder w = new WorkOrder {
+                    AppointmentID = AppointmentID,
+                    Complete = 0,
+                    Id = db.WorkOrders.Count() + 1,
+                    TechnicianID = -1
+                };
+                db.WorkOrders.Add(w);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "ConvertToOrder", e.Message);
+                }
+
+            }
+        }
     }
 }

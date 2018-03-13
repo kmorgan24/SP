@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ShopManagerClasses;
 
 namespace ShopManager
 {
@@ -19,9 +20,21 @@ namespace ShopManager
     /// </summary>
     public partial class AssignWorkWindow : Window
     {
-        public AssignWorkWindow()
+        private List<Technician> Users;
+        long WorkOrderid;
+        double Hours;
+
+        public AssignWorkWindow(long WorkOrderID, double hours, List<Technician> users)
         {
             InitializeComponent();
+            Users = users;
+            WorkOrderid = WorkOrderID;
+            Hours = hours;
+
+            foreach (var item in Users)
+            {
+                TechStack.Children.Add(new TechHoursAssignmentView(item.Name, Hours, item.TargetHours, WorkOrderid, item.Id, MainWindow.AppServer.GetAssignedJobs(item.Id)));
+            }
         }
     }
 }

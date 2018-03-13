@@ -25,18 +25,20 @@ namespace ShopManager
         public int Complete;
         public int Total;
         public double Hours;
+        public long OrderID;
 
         public WorkOrderListingDisplay()
         {
             InitializeComponent();
         }
-        public WorkOrderListingDisplay(Appointment app, int complete, int total, double hours)
+        public WorkOrderListingDisplay(Appointment app, long orderID, int complete, int total, double hours)
         {
             InitializeComponent();
             App = app;
             Complete = complete;
             Total = total;
             Hours = hours;
+            OrderID = orderID;
 
             NameLabel.Content = app._customer.FName +" " + app._customer.LName;
             CarLabel.Content = app._car.Year + " " + app._car.Make + " " + app._car.Model;
