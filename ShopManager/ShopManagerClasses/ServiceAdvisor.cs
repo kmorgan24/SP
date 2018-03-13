@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShopManagerClasses
 {
+    [Serializable]
     public class ServiceAdvisor : User
     {
         long _active;

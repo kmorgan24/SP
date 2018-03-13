@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace ShopManagerClasses
 {
+    
+    [Serializable]
     public class Technician: User
     {
         public long Active { get; set; }

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Reflection;
 
 namespace ShopManager
 {
@@ -20,48 +21,70 @@ namespace ShopManager
     /// </summary>
     public partial class ServiceAdvisorWindow : Window
     {
+        long IDofSelected = -1;
+        List<Technician> Users;
+        List<WorkOrder> Orders;
         public ServiceAdvisorWindow()
         {
             InitializeComponent();
-            Button b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            UnassignedStackPanel.Children.Add(b);
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            UnassignedStackPanel.Children.Add(b);
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            UnassignedStackPanel.Children.Add(b);
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            UnassignedStackPanel.Children.Add(b);
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            UnassignedStackPanel.Children.Add(b);
+            Users = MainWindow.AppServer.GetTechs();
+            Orders = MainWindow.AppServer.GetOrders();
+            foreach (var item in Users)
+            {
+                if (item is Technician)
+                {
+                    if (item.Active == 1)
+                    {
+                        InProgressStackPanel.Children.Add(new TechAssignedWorkDisplay(item as Technician));
+                    }
+                }
+            }
+            foreach (var item in Orders)
+            {
+                int totalCount = 0;
+                int completeCount = 0;
+                double hours = 0;
+                foreach (var item2 in item.app.Labor)
+                {
+                    hours += item2.Hours;
+                    if (item2.Complete)
+                    {
+                        completeCount++;
+                    }
+                    totalCount++;
+                }
+                if (item.TechnicianID == -1)
+                {
+                    Button b = new Button();
+                    b.Click += ItemBtn_Click;
+                    b.Content = new WorkOrderListingDisplay(item.app, completeCount, totalCount, hours);
+                    UnassignedStackPanel.Children.Add(b);
+                }
+                else if (totalCount == completeCount && completeCount != 0)
+                {
+                    Button b = new Button();
+                    b.Click += ItemBtn_Click;
+                    b.Content = new WorkOrderListingDisplay(item.app, completeCount, totalCount, hours);
+                    CompletedStackPanel.Children.Add(b);
+                }
+                else
+                {
+                    foreach (TechAssignedWorkDisplay item2 in InProgressStackPanel.Children)
+                    {
+                        if (item2.Tech.Id == item.TechnicianID)
+                        {
+                            item2.AddJob(item);
+                        }
+                    }
+                }
+            }
 
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            CompletedStackPanel.Children.Add(b);
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            CompletedStackPanel.Children.Add(b);
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            CompletedStackPanel.Children.Add(b);
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            CompletedStackPanel.Children.Add(b);
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            CompletedStackPanel.Children.Add(b);
-            b = new Button();
-            b.Content = new WorkOrderListingDisplay();
-            CompletedStackPanel.Children.Add(b);
 
-            InProgressStackPanel.Children.Add(new TechAssignedWorkDisplay());
-            InProgressStackPanel.Children.Add(new TechAssignedWorkDisplay());
-            InProgressStackPanel.Children.Add(new TechAssignedWorkDisplay());
-            InProgressStackPanel.Children.Add(new TechAssignedWorkDisplay());
+
+
+
+ 
+
         }
         public ServiceAdvisorWindow(string name, List<WorkOrder> orders)
         {
@@ -82,6 +105,12 @@ namespace ShopManager
         private void AutoAssignJobsBtn_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void ItemBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = sender as Button;
+            WorkOrderListingDisplay w = b.Content as WorkOrderListingDisplay;
+            IDofSelected = w.App.Id;
         }
     }
 }

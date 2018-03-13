@@ -758,6 +758,42 @@ namespace Server
 
         }
 
+        public List<ShopManagerClasses.Technician> GetTechs()
+        {
+            List<ShopManagerClasses.Technician> RUsers = new List<ShopManagerClasses.Technician>();
+            using (var db = new mainEntities())
+            {
+                try
+                {
+                    var users =
+                        from u in db.Users
+                        where u.TargetHours != -1
+                        select u;
+                    foreach (var item in users)
+                    {
+                        ShopManagerClasses.Technician tempSUser = new ShopManagerClasses.Technician();
+                        tempSUser.Id = item.Id;
+                        tempSUser.LoggedIn = item.LoggedIn;
+                        tempSUser.LoginName = item.LoginName;
+                        tempSUser.Name = item.Name;
+                        tempSUser.Password = item.Password;
+                        tempSUser.Skill = item.Skill;
+                        tempSUser.TargetHours = item.TargetHours;
+                        tempSUser.Active = item.Active;
+                        RUsers.Add(tempSUser);
+                    }
+                }
+                catch (Exception e)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_RETURN_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return Data or to Connect", "GetUsers", e.Message);
+                }
+
+            }
+
+                return RUsers;
+
+
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -885,6 +921,25 @@ namespace Server
                 }
                 return results;
             }
+        }
+
+        public List<ShopManagerClasses.WorkOrder> GetOrders()
+        {
+            List<ShopManagerClasses.WorkOrder> Jobs = new List<ShopManagerClasses.WorkOrder>();
+            using (var db = new mainEntities())
+            {
+                var orders =
+                    from o in db.WorkOrders
+                    where o.Complete == 0
+                    select o;
+                foreach (var item in orders)
+                {
+                    ShopManagerClasses.WorkOrder temp = new ShopManagerClasses.WorkOrder(GetAppointmentByID(item.AppointmentID), item.Id, item.TechnicianID, false);
+                    Jobs.Add(temp);
+                }
+            }
+
+            return Jobs;
         }
     }
 }

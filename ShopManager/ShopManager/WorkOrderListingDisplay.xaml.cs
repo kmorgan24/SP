@@ -21,6 +21,11 @@ namespace ShopManager
     /// </summary>
     public partial class WorkOrderListingDisplay : UserControl
     {
+        public Appointment App;
+        public int Complete;
+        public int Total;
+        public double Hours;
+
         public WorkOrderListingDisplay()
         {
             InitializeComponent();
@@ -28,6 +33,11 @@ namespace ShopManager
         public WorkOrderListingDisplay(Appointment app, int complete, int total, double hours)
         {
             InitializeComponent();
+            App = app;
+            Complete = complete;
+            Total = total;
+            Hours = hours;
+
             NameLabel.Content = app._customer.FName +" " + app._customer.LName;
             CarLabel.Content = app._car.Year + " " + app._car.Make + " " + app._car.Model;
             CompletenessLabel.Content = complete + " of " + total;

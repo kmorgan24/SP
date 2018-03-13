@@ -21,6 +21,7 @@ namespace ShopManager
     /// </summary>
     public partial class TechAssignedWorkDisplay : UserControl
     {
+        public Technician Tech;
         public TechAssignedWorkDisplay()
         {
             InitializeComponent();
@@ -40,10 +41,28 @@ namespace ShopManager
             b.Content = new WorkOrderListingDisplay();
             AssignedWorkPanel.Children.Add(b);
         }
-        public TechAssignedWorkDisplay(WorkOrder Order)
+        public TechAssignedWorkDisplay(Technician tech)
         {
             InitializeComponent();
-           
+            Tech = tech;
+        }
+        public void AddJob(WorkOrder order)
+        {
+            int totalCount = 0;
+            int completeCount = 0;
+            double hours = 0;
+            foreach (var item2 in order.app.Labor)
+            {
+                hours += item2.Hours;
+                if (item2.Complete)
+                {
+                    completeCount++;
+                }
+                totalCount++;
+            }
+            Button b = new Button();
+            b.Content = new WorkOrderListingDisplay(order.app, completeCount, totalCount, hours);
+            AssignedWorkPanel.Children.Add(b);
         }
     }
 }

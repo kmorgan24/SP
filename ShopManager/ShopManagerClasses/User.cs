@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace ShopManagerClasses
 {
+    //[System.Xml.Serialization.XmlInclude(typeof(Technician))]
+    //[System.Xml.Serialization.XmlInclude(typeof(ServiceAdvisor))]
     public interface User
     {
         long Id { get; set; }
