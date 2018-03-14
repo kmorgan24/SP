@@ -83,7 +83,7 @@ namespace ShopManager
 
 
 
- 
+
 
         }
         public ServiceAdvisorWindow(string name, List<WorkOrder> orders)
@@ -122,7 +122,64 @@ namespace ShopManager
 
         private void AutoAssignJobsBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            //auto assign focuses on even distribution across users, getting as close to target as possible
+            //foreach workorder
+            //determine the hours of the job
+            //foreach tech
+            //if they have the fewest hours so far and they are not going to go over the target record the TechID number
+            //if it worked assign the job, if not leave it to deal with later
+            foreach (var order in Orders)
+            {
+                long IDofLastEligibleTech = -1;
+                double hoursOfLastTech = -1;
+                double hoursCount = 0;
+                foreach (var item in order.app.Labor)
+                {
+                    hoursCount += item.Hours;
+                }
+                foreach (var tech in Users)
+                {
+                    if (hoursOfLastTech != -1)
+                    {
+                        double techCurrentHours = 0;
+                        foreach (var assignedjob in MainWindow.AppServer.GetAssignedJobs(tech.Id))
+                        {
+                            foreach (var item in assignedjob.app.Labor)
+                            {
+                                techCurrentHours += item.Hours;
+                            }
+                        }
+                        if (hoursOfLastTech > techCurrentHours)
+                        {
+                            if (techCurrentHours + hoursCount <= tech.TargetHours)
+                            {
+                                IDofLastEligibleTech = tech.Id;
+                                hoursOfLastTech = techCurrentHours;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        double techCurrentHours = 0;
+                        foreach (var assignedjob in MainWindow.AppServer.GetAssignedJobs(tech.Id))
+                        {
+                            foreach (var item in assignedjob.app.Labor)
+                            {
+                                techCurrentHours += item.Hours;
+                            }
+                        }
+                        if ((techCurrentHours + hoursCount) <= tech.TargetHours)
+                        {
+                            IDofLastEligibleTech = tech.Id;
+                            hoursOfLastTech = techCurrentHours;
+                        }
+                    }
+                }
+                if (IDofLastEligibleTech != -1)
+                {
+                    MainWindow.AppServer.AssignJob(IDofLastEligibleTech, order.Id);
+                }
+            }
         }
         private void ItemBtn_Click(object sender, RoutedEventArgs e)
         {

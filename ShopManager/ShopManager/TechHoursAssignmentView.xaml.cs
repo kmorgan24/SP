@@ -54,10 +54,10 @@ namespace ShopManager
                 AssignedJobsStack.Children.Add(new WorkOrderListingDisplay(item.app, item.Id, 0, numLaborItems, totalJobHours));
             }
             TechNameLabel.Content = techname;
-            HoursLabel.Content = JobHours + totalCurrentHours + " of " + MaxHours;
+            HoursLabel.Content = (JobHours + totalCurrentHours) + " of " + MaxHours;
             HoursProgressBar.Minimum = 0;
             HoursProgressBar.Maximum = MaxHours;
-            HoursProgressBar.Value = JobHours + totalCurrentHours;
+            HoursProgressBar.Value = (JobHours + totalCurrentHours);
         }
 
         private void SelectBtn_Click(object sender, RoutedEventArgs e)

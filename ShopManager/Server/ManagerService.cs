@@ -944,7 +944,31 @@ namespace Server
 
         public void MarkOrderComplete(long idofSelected)
         {
-            throw new NotImplementedException();
+            using (var db = new mainEntities())
+            {
+                var order =
+                    from o in db.WorkOrders
+                    where o.Id == idofSelected
+                    select o;
+                try
+                {
+                    order.First().Complete = 1;
+                }
+                catch (Exception e1)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return data", "MarkOrderComplete", e1.Message);
+                }
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e2)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "MarkOrderComplete", e2.Message);
+
+                }
+            }
         }
 
         public void AssignJob(long techID, long orderID)
@@ -959,18 +983,18 @@ namespace Server
                 {
                     order.First().TechnicianID = techID;
                 }
-                catch (Exception)
+                catch (Exception e1)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Return data", "AssignJob", e1.Message);
                 }
-                
+
                 try
                 {
                     db.SaveChanges();
                 }
-                catch (Exception)
+                catch (Exception e2)
                 {
-
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Save Changes", "AssignJob", e2.Message);
                 }
             }
         }
