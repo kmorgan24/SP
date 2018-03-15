@@ -71,14 +71,18 @@
                 <Grid Background="#FFE5E5E5">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition Height="3*"/>
                         <RowDefinition/>
                         <RowDefinition Height="7*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Add New Note" HorizontalAlignment="Center"/>
-                    <TextBox Name="NewNoteText" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    <Button Name="AddBtn" Content="Add Note" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="30" Click="AddNoteBtn_Click"/>
-                    <ScrollViewer Grid.Row="3">
+                    <Label Content="Job Status: "/>
+                    <TextBox Name="JobStatusText" HorizontalAlignment="Center" Width="300" VerticalAlignment="Center"/>
+                    <Button Name="JobStatusBtn" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Update Status" Click="JobStatusBtn_Click"/>
+                    <Label Content="Add New Note" Grid.Row="1" HorizontalAlignment="Center"/>
+                    <TextBox Name="NewNoteText" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    <Button Name="AddBtn" Content="Add Note" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" MinHeight="30" Click="AddNoteBtn_Click"/>
+                    <ScrollViewer Grid.Row="4">
                         <StackPanel Name="NotesStack"/>
                     </ScrollViewer>
                 </Grid>

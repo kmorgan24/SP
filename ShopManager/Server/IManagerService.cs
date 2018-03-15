@@ -100,5 +100,8 @@ namespace Server
 
         [OperationContract]
         long AddPartToOrder(ShopManagerClasses.Part p);
+
+        [OperationContract]
+        void UpdateOrderStatus(long id, string text);
     }
 }

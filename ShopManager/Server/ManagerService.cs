@@ -468,7 +468,7 @@ namespace Server
                     select o;
                 foreach (var item in orders)
                 {
-                    ShopManagerClasses.WorkOrder temp = new ShopManagerClasses.WorkOrder(GetAppointmentByID(item.AppointmentID), item.Id, item.TechnicianID, item.Complete == 0 ? false : true);
+                    ShopManagerClasses.WorkOrder temp = new ShopManagerClasses.WorkOrder(GetAppointmentByID(item.AppointmentID), item.Id, item.TechnicianID, item.Complete == 0 ? false : true, item.Status);
                     Jobs.Add(temp);
                 }
             }
@@ -934,7 +934,7 @@ namespace Server
                     select o;
                 foreach (var item in orders)
                 {
-                    ShopManagerClasses.WorkOrder temp = new ShopManagerClasses.WorkOrder(GetAppointmentByID(item.AppointmentID), item.Id, item.TechnicianID, false);
+                    ShopManagerClasses.WorkOrder temp = new ShopManagerClasses.WorkOrder(GetAppointmentByID(item.AppointmentID), item.Id, item.TechnicianID, false, item.Status);
                     Jobs.Add(temp);
                 }
             }
@@ -1180,6 +1180,33 @@ namespace Server
                     return PartsList;
                 }
                 return PartsList;
+            }
+        }
+
+        public void UpdateOrderStatus(long id, string text)
+        {
+            using (var db = new mainEntities())
+            {
+                var target =
+                    from o in db.WorkOrders
+                    where o.Id == id
+                    select o;
+                try
+                {
+                    target.First().Status = text;
+                }
+                catch (Exception)
+                {
+
+                }
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
             }
         }
     }

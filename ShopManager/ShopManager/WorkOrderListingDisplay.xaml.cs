@@ -46,7 +46,7 @@ namespace ShopManager
             CarLabel.Content = app._car.Year + " " + app._car.Make + " " + app._car.Model;
             CompletenessLabel.Content = complete + " of " + total;
             HoursLabel.Content = hours;
-            JobStatusLabel.Content = "In Progress";
+            JobStatusLabel.Content = order.Status;
             foreach (var item in app.Labor)
             {
                 LaborDescriptionsBox.Text += item.Description + Environment.NewLine;

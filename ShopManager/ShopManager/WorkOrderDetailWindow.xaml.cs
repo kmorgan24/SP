@@ -50,6 +50,7 @@ namespace ShopManager
             ProdDateTxtBox.Text = Order.app._car.ProdDate;
             StateTxtBox.Text = Order.app._car.State;
             PlateTxtBox.Text = Order.app._car.Plate;
+            JobStatusText.Text = Order.Status;
 
 
             // Notes Setup
@@ -127,6 +128,11 @@ namespace ShopManager
             p.InStock = ((bool)InStockCheckBox.IsChecked ? 1 : 0);  // if both record as in stock
             p.Id = MainWindow.AppServer.AddPartToOrder(p);
             PartsStack.Children.Add(new PartDetailDisplay(p));
+        }
+
+        private void JobStatusBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.AppServer.UpdateOrderStatus(Order.Id, JobStatusText.Text);
         }
     }
 }

@@ -14,13 +14,15 @@ namespace ShopManagerClasses
         public Appointment app;
         public long TechnicianID { get; set; }
         public bool Complete;
+        public string Status;
 
-        public WorkOrder(Appointment App, long ID, long TechID, bool complete)
+        public WorkOrder(Appointment App, long ID, long TechID, bool complete, string status)
         {
             app = App;
             Id = ID;
             TechnicianID = TechID;
             Complete = complete;
+            Status = status;
         }
 
         public override string ToString()

@@ -18,5 +18,6 @@ namespace Server
         public long AppointmentID { get; set; }
         public long TechnicianID { get; set; }
         public Nullable<long> Complete { get; set; }
+        public string Status { get; set; }
     }
 }
