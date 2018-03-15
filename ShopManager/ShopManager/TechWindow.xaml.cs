@@ -52,19 +52,37 @@ namespace ShopManager
                     }
                     if (completeCount == 0)
                     {
-                        NewJobsStack.Children.Add(new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours));
+                        Button b = new Button();
+                        b.Click += B_Click;
+                        b.Content = new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours);
+                        NewJobsStack.Children.Add(b);
                     }
                     else if (completeCount < totalCount)
                     {
-                        IPJobsStack.Children.Add(new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours));
+                        Button b = new Button();
+                        b.Click += B_Click;
+                        b.Content = new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours);
+                        IPJobsStack.Children.Add(b);
                     }
                     else
                     {
-                        CompleteJobsStack.Children.Add(new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours));
+                        Button b = new Button();
+                        b.Click += B_Click;
+                        b.Content = new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours);
+                        CompleteJobsStack.Children.Add(b);
                     }
                     
                 }
             }
         }
+
+        private void B_Click(object sender, RoutedEventArgs e)
+        {
+            Button temp = sender as Button;
+            WorkOrderListingDisplay content = temp.Content as WorkOrderListingDisplay;
+            Window win = new WorkOrderDetailWindow(content.Order);
+            win.ShowDialog();
+        }
     }
+
 }

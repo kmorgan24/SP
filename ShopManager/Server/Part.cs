@@ -21,5 +21,8 @@ namespace Server
         public long InStock { get; set; }
         public string Supplier { get; set; }
         public long WorkOrderID { get; set; }
+        public Nullable<double> ListPrice { get; set; }
+        public Nullable<double> Cost { get; set; }
+        public Nullable<double> Quantity { get; set; }
     }
 }

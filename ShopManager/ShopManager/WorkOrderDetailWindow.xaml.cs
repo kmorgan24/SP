@@ -65,6 +65,10 @@ namespace ShopManager
             }
 
             // Parts
+            foreach (var item in MainWindow.AppServer.GetPartsByOrderID(order.Id))
+            {
+                PartsStack.Children.Add(new PartDetailDisplay(item));
+            }
 
         }
 
@@ -92,6 +96,7 @@ namespace ShopManager
             l.Complete = false;
             l.AppointmentID = Order.app.Id;
             l.Id = MainWindow.AppServer.AddLaborToOrder(l);
+            LaborItemStack.Children.Add(new LaborItemDetailDisplay(l));
         }
 
         private void AddPartBtn_Click(object sender, RoutedEventArgs e)
@@ -121,6 +126,7 @@ namespace ShopManager
             p.InStock = ((bool)InStockCheckBox.IsChecked ? 2 : 0);
             p.InStock = ((bool)InStockCheckBox.IsChecked ? 1 : 0);  // if both record as in stock
             p.Id = MainWindow.AppServer.AddPartToOrder(p);
+            PartsStack.Children.Add(new PartDetailDisplay(p));
         }
     }
 }

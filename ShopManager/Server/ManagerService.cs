@@ -366,7 +366,7 @@ namespace Server
                                 tempSLabor.Id = tempLaborItem.Id;
                                 tempSLabor.Complete = (tempLaborItem.Complete == 0) ? false : true;
                                 tempSLabor.Description = tempLaborItem.Description;
-                                tempSLabor.LongDescription = "Not Yet implimented on DB";
+                                tempSLabor.LongDescription = tempLaborItem.LongDescription;
                                 tempSLabor.Hours = tempLaborItem.Hours;
                                 labor.Add(tempSLabor);
                             }
@@ -591,7 +591,7 @@ namespace Server
             }
             return temp;
         }
-        
+
 
         public List<ShopManagerClasses.Car> GetCarsByCustomerID(long id)
         {
@@ -790,7 +790,7 @@ namespace Server
 
             }
 
-                return RUsers;
+            return RUsers;
 
 
         }
@@ -1003,7 +1003,8 @@ namespace Server
         {
             using (var db = new mainEntities())
             {
-                WorkOrder w = new WorkOrder {
+                WorkOrder w = new WorkOrder
+                {
                     AppointmentID = AppointmentID,
                     Complete = 0,
                     Id = db.WorkOrders.Count() + 1,
@@ -1053,17 +1054,133 @@ namespace Server
 
         public long AddNoteToOrder(ShopManagerClasses.Note temp)
         {
-            throw new NotImplementedException();
+            long Rvalue = -1;
+            using (var db = new mainEntities())
+            {
+                Note NewNote = new Note
+                {
+                    Id = db.Notes.Count() + 1,
+                    Active = temp.Active,
+                    AppointmentID = temp.AppointmentID,
+                    CarID = temp.CarID,
+                    CustomerID = temp.CustomerID,
+                    Description = temp.Description,
+                    Visible = temp.Visible
+                };
+                db.Notes.Add(NewNote);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "AddNoteToOrder", e.Message);
+                    return Rvalue;
+                }
+                Rvalue = NewNote.Id;
+            }
+            return Rvalue;
         }
 
         public long AddLaborToOrder(LaborItem l)
         {
-            throw new NotImplementedException();
+            long rvalue = -1;
+            using (var db = new mainEntities())
+            {
+
+                Labor newlabor = new Labor
+                {
+                    Id = db.Labors.Count() + 1,
+                    AppointmentID = l.AppointmentID,
+                    Complete = l.Complete ? 1 : 0,
+                    Description = l.Description,
+                    LongDescription = l.LongDescription,
+                    Hours = (long)l.Hours    // this needs changed on the DB to support tenths of an hour
+                };
+                
+                try
+                {
+                    db.Labors.Add(newlabor);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "AddLaborToOrder", e.Message);
+                    return rvalue;
+                }
+                rvalue = newlabor.Id;
+
+
+            }
+            return rvalue;
         }
 
         public long AddPartToOrder(ShopManagerClasses.Part p)
         {
-            throw new NotImplementedException();
+            long Rvalue = -1;
+            using (var db = new mainEntities())
+            {
+                Part NewPart = new Part
+                {
+                    Id = db.Parts.Count() + 1,
+                    ListPrice = p.ListPrice,
+                    Cost = p.Cost,
+                    InStock = p.InStock,
+                    PartDescription = p.PartDescription,
+                    PartName = p.PartName,
+                    PartNumber = p.PartNumber,
+                    Quantity = p.Quantity,
+                    Supplier = p.Supplier,
+                    WorkOrderID = p.WorkOrderID
+                };
+                db.Parts.Add(NewPart);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "AddPartToOrder", e.Message);
+                    return Rvalue;
+                }
+                Rvalue = NewPart.Id;
+            }
+            return Rvalue;
+        }
+
+        public List<ShopManagerClasses.Part> GetPartsByOrderID(long id)
+        {
+            List<ShopManagerClasses.Part> PartsList = new List<ShopManagerClasses.Part>();
+            using (var db = new mainEntities())
+            {
+                try
+                {
+                    var p =
+                                       from P in db.Parts
+                                       where P.WorkOrderID == id
+                                       select P;
+                    foreach (var item in p)
+                    {
+                        ShopManagerClasses.Part temp = new ShopManagerClasses.Part();
+                        temp.WorkOrderID = item.WorkOrderID;
+                        temp.Supplier = item.Supplier;
+                        temp.Quantity = item.Quantity == null ? 0 : (double)item.Quantity;
+                        temp.PartNumber = item.PartNumber;
+                        temp.PartName = item.PartName;
+                        temp.PartDescription = item.PartDescription;
+                        temp.ListPrice = item.ListPrice == null ? 0 : (double)item.ListPrice;
+                        temp.InStock = item.InStock;
+                        temp.Id = item.Id;
+                        PartsList.Add(temp);
+                    }
+                }
+
+                catch (Exception)
+                {
+                    return PartsList;
+                }
+                return PartsList;
+            }
         }
     }
 }

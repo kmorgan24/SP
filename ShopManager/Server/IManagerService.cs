@@ -70,7 +70,8 @@ namespace Server
 
         [OperationContract]
         void AddPhoneNumber(ShopManagerClasses.PhoneNumber num, long _customerID);
-
+        [OperationContract]
+        List<ShopManagerClasses.Part> GetPartsByOrderID(long id);
         [OperationContract]
         long AddNoteToOrder(ShopManagerClasses.Note temp);
         [OperationContract]

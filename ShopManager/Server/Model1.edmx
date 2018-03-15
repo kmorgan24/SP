@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=&quot;C:\Users\Kyronn\Documents\CST SP\ManagerDB.db&quot;" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="mainModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="Data Source=&quot;C:\Users\Kyronn\Documents\CST SP\ManagerDB.db&quot;" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Address">
           <Key>
             <PropertyRef Name="Id" />
@@ -92,6 +92,9 @@
           <Property Name="InStock" Type="integer" Nullable="false" />
           <Property Name="Supplier" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
           <Property Name="WorkOrderID" Type="integer" Nullable="false" />
+          <Property Name="ListPrice" Type="real" />
+          <Property Name="Cost" Type="real" />
+          <Property Name="Quantity" Type="real" />
         </EntityType>
         <EntityType Name="PhoneNumbers">
           <Key>
@@ -155,7 +158,8 @@
           <EntitySet Name="User" EntityType="Self.User" store:Type="Tables" />
           <EntitySet Name="WorkOrder" EntityType="Self.WorkOrder" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -246,6 +250,9 @@
           <Property Name="InStock" Type="Int64" Nullable="false" />
           <Property Name="Supplier" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="WorkOrderID" Type="Int64" Nullable="false" />
+          <Property Name="ListPrice" Type="Double" />
+          <Property Name="Cost" Type="Double" />
+          <Property Name="Quantity" Type="Double" />
         </EntityType>
         <EntityType Name="PhoneNumber">
           <Key>
@@ -376,12 +383,12 @@
           <EntitySetMapping Name="Labors">
             <EntityTypeMapping TypeName="mainModel.Labor">
               <MappingFragment StoreEntitySet="Labor">
-                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
                 <ScalarProperty Name="Hours" ColumnName="Hours" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Complete" ColumnName="Complete" />
+                <ScalarProperty Name="LongDescription" ColumnName="LongDescription" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -408,6 +415,9 @@
                 <ScalarProperty Name="InStock" ColumnName="InStock" />
                 <ScalarProperty Name="Supplier" ColumnName="Supplier" />
                 <ScalarProperty Name="WorkOrderID" ColumnName="WorkOrderID" />
+                <ScalarProperty Name="ListPrice" ColumnName="ListPrice" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -456,10 +466,10 @@
           <EntitySetMapping Name="WorkOrders">
             <EntityTypeMapping TypeName="mainModel.WorkOrder">
               <MappingFragment StoreEntitySet="WorkOrder">
-                <ScalarProperty Name="Complete" ColumnName="Complete" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
                 <ScalarProperty Name="TechnicianID" ColumnName="TechnicianID" />
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
