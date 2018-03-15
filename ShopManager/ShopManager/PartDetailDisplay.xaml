@@ -5,11 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ShopManager"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="500">
+             d:DesignHeight="200" d:DesignWidth="650">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="100"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition MaxWidth="100"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Part #: " HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0"/>
+        <TextBox Name="PartNumberBox" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <Label Content="Part Name: " HorizontalAlignment="Right" Grid.Row="1" Grid.Column="0"/>
+        <TextBox Name="PartNameBox" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <Label Content="Supplier: " HorizontalAlignment="Right" Grid.Row="2" Grid.Column="0"/>
+        <TextBox Name="SupplierBox" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <CheckBox Name="InStockCheckBox" Content="In Stock" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="InStockCheckBox_Checked"/>
+        <CheckBox Name="OnOrderCheckBox" Content="On Order" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" Checked="OnOrderCheckBox_Checked"/>
+
+        <Label Content="List Price: " HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2"/>
+        <TextBox Name="ListPriceBox" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <Label Content="Cost: " HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2"/>
+        <TextBox Name="CostBox" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+        <Label Content="Quantity: " HorizontalAlignment="Right" Grid.Row="2" Grid.Column="2"/>
+        <TextBox Name="QuantityBox" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
+
+        <Label Content="Description" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="4"/>
+        <TextBox Name="DescriptionBox" Grid.Row="1" Grid.Column="4" Grid.RowSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
 </UserControl>

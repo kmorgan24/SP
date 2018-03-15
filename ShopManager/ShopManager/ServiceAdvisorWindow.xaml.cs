@@ -57,14 +57,14 @@ namespace ShopManager
                 {
                     Button b = new Button();
                     b.Click += ItemBtn_Click;
-                    b.Content = new WorkOrderListingDisplay(item.app, item.Id, completeCount, totalCount, hours);
+                    b.Content = new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours);
                     UnassignedStackPanel.Children.Add(b);
                 }
                 else if (totalCount == completeCount && completeCount != 0)
                 {
                     Button b = new Button();
                     b.Click += ItemBtn_Click;
-                    b.Content = new WorkOrderListingDisplay(item.app, item.Id, completeCount, totalCount, hours);
+                    b.Content = new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours);
                     CompletedStackPanel.Children.Add(b);
                 }
                 else

@@ -1055,5 +1055,15 @@ namespace Server
         {
             throw new NotImplementedException();
         }
+
+        public long AddLaborToOrder(LaborItem l)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long AddPartToOrder(ShopManagerClasses.Part p)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

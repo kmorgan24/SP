@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ShopManagerClasses;
 
 namespace ShopManager
 {
@@ -20,9 +21,30 @@ namespace ShopManager
     /// </summary>
     public partial class PartDetailDisplay : UserControl
     {
-        public PartDetailDisplay()
+        Part part;
+        public PartDetailDisplay(Part p)
         {
             InitializeComponent();
+            part = p;
+            PartNumberBox.Text = p.PartDescription;
+            PartNameBox.Text = p.PartName;
+            QuantityBox.Text = p.Quantity.ToString();
+            SupplierBox.Text = p.Supplier;
+            InStockCheckBox.IsChecked = p.InStock == 1 ? true : false;
+            OnOrderCheckBox.IsChecked = p.InStock == 2 ? true : false;
+            DescriptionBox.Text = p.PartDescription;
+            ListPriceBox.Text = p.ListPrice.ToString();
+            CostBox.Text = p.Cost.ToString();
+        }
+
+        private void InStockCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OnOrderCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

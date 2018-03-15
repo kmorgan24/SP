@@ -21,6 +21,7 @@ namespace ShopManager
     /// </summary>
     public partial class WorkOrderListingDisplay : UserControl
     {
+        public WorkOrder Order;
         public Appointment App;
         public int Complete;
         public int Total;
@@ -31,9 +32,10 @@ namespace ShopManager
         {
             InitializeComponent();
         }
-        public WorkOrderListingDisplay(Appointment app, long orderID, int complete, int total, double hours)
+        public WorkOrderListingDisplay(WorkOrder order, Appointment app, long orderID, int complete, int total, double hours)
         {
             InitializeComponent();
+            Order = order;
             App = app;
             Complete = complete;
             Total = total;

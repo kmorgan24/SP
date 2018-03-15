@@ -61,8 +61,17 @@ namespace ShopManager
                 totalCount++;
             }
             Button b = new Button();
-            b.Content = new WorkOrderListingDisplay(order.app, order.Id, completeCount, totalCount, hours);
+            b.Click += B_Click;
+            b.Content = new WorkOrderListingDisplay(order, order.app, order.Id, completeCount, totalCount, hours);
             AssignedWorkPanel.Children.Add(b);
+        }
+
+        private void B_Click(object sender, RoutedEventArgs e)
+        {
+            Button temp = sender as Button;
+            WorkOrderListingDisplay content = temp.Content as WorkOrderListingDisplay;
+            Window win = new WorkOrderDetailWindow(content.Order);
+            win.ShowDialog();
         }
     }
 }

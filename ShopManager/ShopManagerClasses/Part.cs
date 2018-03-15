@@ -16,6 +16,10 @@ namespace ShopManagerClasses
         public string Supplier { get; set; }
         public long WorkOrderID { get; set; }
 
+        public double ListPrice { get; set; }
+        public double Cost { get; set; }
+        public double Quantity { get; set; }
+
         public override string ToString()
         {
             string temp = Environment.NewLine + "Object Part";

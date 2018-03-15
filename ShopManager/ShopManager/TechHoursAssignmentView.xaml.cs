@@ -51,7 +51,7 @@ namespace ShopManager
                     numLaborItems++;
                 }
                 totalCurrentHours += totalJobHours;
-                AssignedJobsStack.Children.Add(new WorkOrderListingDisplay(item.app, item.Id, 0, numLaborItems, totalJobHours));
+                AssignedJobsStack.Children.Add(new WorkOrderListingDisplay(item, item.app, item.Id, 0, numLaborItems, totalJobHours));
             }
             TechNameLabel.Content = techname;
             HoursLabel.Content = (JobHours + totalCurrentHours) + " of " + MaxHours;

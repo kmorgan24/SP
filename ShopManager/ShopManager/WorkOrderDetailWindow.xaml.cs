@@ -93,5 +93,34 @@ namespace ShopManager
             l.AppointmentID = Order.app.Id;
             l.Id = MainWindow.AppServer.AddLaborToOrder(l);
         }
+
+        private void AddPartBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Part p = new Part();
+            p.WorkOrderID = Order.Id;
+            p.Supplier = SupplierBox.Text;
+            try
+            {
+                p.Quantity = double.Parse(QuantityBox.Text);
+            }
+            catch (Exception)
+            {
+                p.Quantity = 0;
+            }
+            p.PartNumber = PartNumberBox.Text;
+            p.PartName = PartNameBox.Text;
+            p.PartDescription = DescriptionBox.Text;
+            try
+            {
+                p.ListPrice = double.Parse(ListPriceBox.Text);
+            }
+            catch (Exception)
+            {
+                p.ListPrice = 0;
+            }
+            p.InStock = ((bool)InStockCheckBox.IsChecked ? 2 : 0);
+            p.InStock = ((bool)InStockCheckBox.IsChecked ? 1 : 0);  // if both record as in stock
+            p.Id = MainWindow.AppServer.AddPartToOrder(p);
+        }
     }
 }

@@ -37,6 +37,7 @@ namespace Server
 
         [OperationContract]
         List<ShopManagerClasses.User> GetUsers();
+
         [OperationContract]
         List<ShopManagerClasses.Technician> GetTechs();
 
@@ -93,6 +94,10 @@ namespace Server
         [OperationContract]
         void ConvertToOrder(long AppointmentID);
 
+        [OperationContract]
+        long AddLaborToOrder(LaborItem l);
 
+        [OperationContract]
+        long AddPartToOrder(ShopManagerClasses.Part p);
     }
 }

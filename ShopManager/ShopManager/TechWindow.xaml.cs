@@ -52,15 +52,15 @@ namespace ShopManager
                     }
                     if (completeCount == 0)
                     {
-                        NewJobsStack.Children.Add(new WorkOrderListingDisplay(item.app, item.Id, completeCount, totalCount, hours));
+                        NewJobsStack.Children.Add(new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours));
                     }
                     else if (completeCount < totalCount)
                     {
-                        IPJobsStack.Children.Add(new WorkOrderListingDisplay(item.app, item.Id, completeCount, totalCount, hours));
+                        IPJobsStack.Children.Add(new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours));
                     }
                     else
                     {
-                        CompleteJobsStack.Children.Add(new WorkOrderListingDisplay(item.app, item.Id, completeCount, totalCount, hours));
+                        CompleteJobsStack.Children.Add(new WorkOrderListingDisplay(item, item.app, item.Id, completeCount, totalCount, hours));
                     }
                     
                 }
