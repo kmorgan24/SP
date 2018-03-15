@@ -1021,5 +1021,39 @@ namespace Server
 
             }
         }
+
+        public void MarkLaborItemComplete(long id)
+        {
+            using (var db = new mainEntities())
+            {
+                var item =
+                    from i in db.Labors
+                    where i.Id == id
+                    select i;
+                try
+                {
+                    item.First().Complete = 1;
+                }
+                catch (Exception)
+                {
+
+                }
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "MarkLaborItemComplete", e.Message);
+                }
+
+            }
+        }
+
+        public long AddNoteToOrder(ShopManagerClasses.Note temp)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

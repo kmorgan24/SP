@@ -114,8 +114,17 @@
     <Compile Include="DayView.xaml.cs">
       <DependentUpon>DayView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LaborItemDetailDisplay.xaml.cs">
+      <DependentUpon>LaborItemDetailDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LaborItemView.xaml.cs">
       <DependentUpon>LaborItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NoteDetailDisplay.xaml.cs">
+      <DependentUpon>NoteDetailDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PartDetailDisplay.xaml.cs">
+      <DependentUpon>PartDetailDisplay.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServiceAdvisorWindow.xaml.cs">
       <DependentUpon>ServiceAdvisorWindow.xaml</DependentUpon>
@@ -134,6 +143,9 @@
     </Compile>
     <Compile Include="TechWindow.xaml.cs">
       <DependentUpon>TechWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WorkOrderDetailWindow.xaml.cs">
+      <DependentUpon>WorkOrderDetailWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkOrderListingDisplay.xaml.cs">
       <DependentUpon>WorkOrderListingDisplay.xaml</DependentUpon>
@@ -182,6 +194,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="LaborItemDetailDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LaborItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +214,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="NoteDetailDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PartDetailDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ServiceAdvisorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TechWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WorkOrderDetailWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

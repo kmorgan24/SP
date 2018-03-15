@@ -30,6 +30,9 @@ namespace Server
         List<ShopManagerClasses.WorkOrder> GetAssignedJobs(long userID);
 
         [OperationContract]
+        void MarkLaborItemComplete(long id);
+
+        [OperationContract]
         List<ShopManagerClasses.WorkOrder> GetOrders();
 
         [OperationContract]
@@ -67,6 +70,8 @@ namespace Server
         [OperationContract]
         void AddPhoneNumber(ShopManagerClasses.PhoneNumber num, long _customerID);
 
+        [OperationContract]
+        long AddNoteToOrder(ShopManagerClasses.Note temp);
         [OperationContract]
         List<ShopManagerClasses.Customer> SearchCustomerByFirstName(string text);
 
