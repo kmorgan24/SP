@@ -1029,7 +1029,7 @@ namespace Server
                         ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "ConvertToOrder", e.Message);
                     }
                 }
-                
+
 
             }
         }
@@ -1108,7 +1108,7 @@ namespace Server
                     LongDescription = l.LongDescription,
                     Hours = (long)l.Hours    // this needs changed on the DB to support tenths of an hour
                 };
-                
+
                 try
                 {
                     db.Labors.Add(newlabor);
@@ -1232,6 +1232,70 @@ namespace Server
                 try
                 {
                     target.First().Date1 = v;
+                }
+                catch (Exception)
+                {
+
+                }
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        public void UpdateCarInfo(ShopManagerClasses.Car _car)
+        {
+            using (var db = new mainEntities())
+            {
+                var target =
+                    from c in db.Cars
+                    where c.Id == _car.Id
+                    select c;
+                try
+                {
+                    Car t = target.First();
+                    t.Make = _car.Make;
+                    t.Model = _car.Model;
+                    t.Plate = _car.Plate;
+                    t.ProdDate = _car.ProdDate;
+                    t.State = _car.State;
+                    t.Vin = _car.Vin;
+                    t.Year = _car.Year;
+                }
+                catch (Exception)
+                {
+
+                }
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        public void UpdateCustomerInfo(ShopManagerClasses.Customer _customer)
+        {
+            using (var db = new mainEntities())
+            {
+                var target =
+                    from c in db.Customers
+                    where c.Id == _customer.Id
+                    select c;
+                try
+                {
+                    Customer t = target.First();
+                    t.FName = _customer.FName;
+                    t.LName = _customer.LName;
+                    t.CompanyName = _customer.CompanyName;
                 }
                 catch (Exception)
                 {

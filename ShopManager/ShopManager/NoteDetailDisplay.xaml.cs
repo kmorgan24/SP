@@ -29,6 +29,7 @@ namespace ShopManager
             LongDescBox.Text = n.Description;
             Active.IsChecked = n.Active == 0 ? false : true;
             Visible.IsChecked = n.Visible == 0 ? false : true;
+            
         }
 
         private void Visible_Checked(object sender, RoutedEventArgs e)

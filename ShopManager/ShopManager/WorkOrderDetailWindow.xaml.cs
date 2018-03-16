@@ -36,11 +36,20 @@ namespace ShopManager
 
 
             // Customer Info Setup
+
             FNameTxtBox.Text = Order.app._customer.FName;
             LNameTxtBox.Text = Order.app._customer.LName;
             CompanyNameTxtBox.Text = Order.app._customer.CompanyName;
             //Add Phone Numbers
-            MainWindow.AppServer.GetCustomerPhoneNumbersByCustomerID(Order.app._customer.Id);
+            try
+            {
+                MainWindow.AppServer.GetCustomerPhoneNumbersByCustomerID(Order.app._customer.Id);
+            }
+            catch (Exception)
+            {
+
+            }
+
 
             //Car Info Setup
             YearTxtBox.Text = Order.app._car.Year.ToString();
@@ -65,11 +74,19 @@ namespace ShopManager
                 LaborItemStack.Children.Add(new LaborItemDetailDisplay(item));
             }
 
-            // Parts
-            foreach (var item in MainWindow.AppServer.GetPartsByOrderID(order.Id))
+            // Parts.
+            try
             {
-                PartsStack.Children.Add(new PartDetailDisplay(item));
+                foreach (var item in MainWindow.AppServer.GetPartsByOrderID(order.Id))
+                {
+                    PartsStack.Children.Add(new PartDetailDisplay(item));
+                }
             }
+            catch (Exception)
+            {
+
+            }
+
 
         }
 
@@ -82,7 +99,15 @@ namespace ShopManager
             temp.CarID = Order.app._car.Id;
             temp.CustomerID = Order.app._customer.Id;
             temp.Description = NewNoteText.Text;
-            temp.Id = MainWindow.AppServer.AddNoteToOrder(temp);
+            try
+            {
+                temp.Id = MainWindow.AppServer.AddNoteToOrder(temp);
+            }
+            catch (Exception)
+            {
+
+            }
+
             NotesStack.Children.Add(new NoteDetailDisplay(temp));
         }
 
@@ -96,7 +121,15 @@ namespace ShopManager
             l.Hours = (int)listBox.SelectedValue;
             l.Complete = false;
             l.AppointmentID = Order.app.Id;
-            l.Id = MainWindow.AppServer.AddLaborToOrder(l);
+            try
+            {
+                l.Id = MainWindow.AppServer.AddLaborToOrder(l);
+            }
+            catch (Exception)
+            {
+                
+            }
+
             LaborItemStack.Children.Add(new LaborItemDetailDisplay(l));
         }
 
@@ -126,13 +159,70 @@ namespace ShopManager
             }
             p.InStock = ((bool)InStockCheckBox.IsChecked ? 2 : 0);
             p.InStock = ((bool)InStockCheckBox.IsChecked ? 1 : 0);  // if both record as in stock
-            p.Id = MainWindow.AppServer.AddPartToOrder(p);
+            try
+            {
+                p.Id = MainWindow.AppServer.AddPartToOrder(p);
+            }
+            catch (Exception)
+            {
+
+            }
+
             PartsStack.Children.Add(new PartDetailDisplay(p));
         }
 
         private void JobStatusBtn_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.AppServer.UpdateOrderStatus(Order.Id, JobStatusText.Text);
+            try
+            {
+                MainWindow.AppServer.UpdateOrderStatus(Order.Id, JobStatusText.Text);
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Order.app._customer.FName = FNameTxtBox.Text;
+            Order.app._customer.LName = LNameTxtBox.Text;
+            Order.app._customer.CompanyName = CompanyNameTxtBox.Text;
+            try
+            {
+                Order.app._car.Year = long.Parse(YearTxtBox.Text);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            Order.app._car.Make = MakeTxtBox.Text;
+            Order.app._car.Model = ModelTxtBox.Text;
+            Order.app._car.Vin = VinTxtBox.Text;
+            Order.app._car.ProdDate = ProdDateTxtBox.Text;
+            Order.app._car.State = StateTxtBox.Text;
+            Order.app._car.Plate = PlateTxtBox.Text;
+            Order.Status = JobStatusText.Text;
+            try
+            {
+                MainWindow.AppServer.UpdateCarInfo(Order.app._car);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            try
+            {
+                MainWindow.AppServer.UpdateCustomerInfo(Order.app._customer);
+            }
+            catch (Exception)
+            {
+
+            }
+
         }
     }
 }

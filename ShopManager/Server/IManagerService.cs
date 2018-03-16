@@ -104,5 +104,11 @@ namespace Server
 
         [OperationContract]
         void UpdateOrderStatus(long id, string text);
+
+        [OperationContract]
+        void UpdateCarInfo(ShopManagerClasses.Car _car);
+
+        [OperationContract]
+        void UpdateCustomerInfo(ShopManagerClasses.Customer _customer);
     }
 }

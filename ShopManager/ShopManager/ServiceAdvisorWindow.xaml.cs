@@ -27,8 +27,23 @@ namespace ShopManager
         public ServiceAdvisorWindow()
         {
             InitializeComponent();
-            Users = MainWindow.AppServer.GetTechs();
-            Orders = MainWindow.AppServer.GetOrders();
+            try
+            {
+                Users = MainWindow.AppServer.GetTechs();
+            }
+            catch (Exception)
+            {
+
+            }
+            try
+            {
+                Orders = MainWindow.AppServer.GetOrders();
+            }
+            catch (Exception)
+            {
+
+            }
+
             foreach (var item in Users)
             {
                 if (item is Technician)
@@ -109,6 +124,7 @@ namespace ShopManager
                 }
                 Window win = new AssignWorkWindow(IDofSelected, temp, Users);
                 win.ShowDialog();
+                ReloadWindow();
             }
         }
 
@@ -116,7 +132,15 @@ namespace ShopManager
         {
             if (IDofSelected != -1)
             {
-                MainWindow.AppServer.MarkOrderComplete(IDofSelected);
+                try
+                {
+                    MainWindow.AppServer.MarkOrderComplete(IDofSelected);
+                }
+                catch (Exception)
+                {
+
+                }
+                
             }
         }
 
@@ -180,12 +204,19 @@ namespace ShopManager
                     MainWindow.AppServer.AssignJob(IDofLastEligibleTech, order.Id);
                 }
             }
+            ReloadWindow();
         }
         private void ItemBtn_Click(object sender, RoutedEventArgs e)
         {
             Button b = sender as Button;
             WorkOrderListingDisplay w = b.Content as WorkOrderListingDisplay;
             IDofSelected = w.OrderID;
+        }
+        private void ReloadWindow()
+        {
+            this.Close();
+            Window win = new ServiceAdvisorWindow();
+            win.Show();
         }
     }
 }
