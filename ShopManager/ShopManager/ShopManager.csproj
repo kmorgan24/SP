@@ -147,6 +147,9 @@
     <Compile Include="TechWindow.xaml.cs">
       <DependentUpon>TechWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WeekView.xaml.cs">
+      <DependentUpon>WeekView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WorkOrderDetailWindow.xaml.cs">
       <DependentUpon>WorkOrderDetailWindow.xaml</DependentUpon>
     </Compile>
@@ -250,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TechWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WeekView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

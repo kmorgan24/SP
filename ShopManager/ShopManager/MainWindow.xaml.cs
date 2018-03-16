@@ -109,6 +109,16 @@ namespace ShopManager
             btnWeekView.Background = SelectedBackground;
 
             CurrentView = CurrentViewTypes.Week;
+            BottomGrid.Children.Clear();
+            AppointmentList = AppServer.GetAppointments(DateTime.Now.AddDays(-2));
+            AppointmentList = AppointmentList.Concat( AppServer.GetAppointments(DateTime.Now.AddDays(-1)) ).ToList();
+            AppointmentList = AppointmentList.Concat(AppServer.GetAppointments(DateTime.Now.AddDays(0))).ToList();
+            AppointmentList = AppointmentList.Concat(AppServer.GetAppointments(DateTime.Now.AddDays(1))).ToList();
+            AppointmentList = AppointmentList.Concat(AppServer.GetAppointments(DateTime.Now.AddDays(2))).ToList();
+            AppointmentList = AppointmentList.Concat(AppServer.GetAppointments(DateTime.Now.AddDays(3))).ToList();
+            AppointmentList = AppointmentList.Concat(AppServer.GetAppointments(DateTime.Now.AddDays(4))).ToList();
+           
+            BottomGrid.Children.Add(new WeekView());
         }
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="ShopManager.WeekView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ShopManager"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="900">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ScrollViewer Grid.Column="0" Grid.Row="1">
+            <StackPanel Name="Stack1"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="1" Grid.Row="1">
+            <StackPanel Name="Stack2"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="2" Grid.Row="1">
+            <StackPanel Name="Stack3"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="3" Grid.Row="1">
+            <StackPanel Name="Stack4"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="4" Grid.Row="1">
+            <StackPanel Name="Stack5"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="5" Grid.Row="1">
+            <StackPanel Name="Stack6"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Column="6" Grid.Row="1">
+            <StackPanel Name="Stack7"/>
+        </ScrollViewer>
+        <Label Name="Label1" Grid.Column="0"/>
+        <Label Name="Label2" Grid.Column="1"/>
+        <Label Name="Label3" Grid.Column="2"/>
+        <Label Name="Label4" Grid.Column="3"/>
+        <Label Name="Label5" Grid.Column="4"/>
+        <Label Name="Label6" Grid.Column="5"/>
+        <Label Name="Label7" Grid.Column="6"/>
+    </Grid>
+</UserControl>
