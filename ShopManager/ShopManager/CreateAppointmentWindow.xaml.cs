@@ -26,11 +26,13 @@ namespace ShopManager
         public Customer _customer;
         public Car _car;
         public List<Date> _dates;
+        public double _hourstotal;
         
 
         public CreateAppointmentWindow()
         {
             InitializeComponent();
+            _hourstotal = 0;
             _notes = new List<string>();
             _labor = new List<LaborItem>();
             _customer = new Customer();
@@ -119,6 +121,36 @@ namespace ShopManager
             }
             
             this.Close();
+        }
+        public void UpdateHoursSelector()
+        {
+
+            //HoursPanel.Children.Clear();
+
+            //for (int i = 0; i < _dates.Count; i++)
+            //{
+            //    List<int> values = new List<int>();
+            //    for (int i2 = 0; i2 < _hourstotal; i2++)
+            //{
+            //    values.Add(i2);
+            //}
+            //    ListBox temp = new ListBox();
+
+            //    temp.ItemsSource = values;
+            //    //temp.SelectedIndex = (int)_hourstotal / _dates.Count;
+            //    temp.SelectionChanged += Temp_SelectionChanged;
+            //    temp.MinWidth = 150;
+            //    HoursPanel.Children.Add(temp);
+            //}
+            foreach (var item in _dates)
+            {
+                item.Hours = ((int)(_hourstotal / _dates.Count()) + 1);
+            }
+        }
+
+        private void Temp_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

@@ -190,6 +190,7 @@ namespace Server
                             AppointmentID = app.Id
                         };
                         db.Dates.Add(d);
+                        db.SaveChanges();
                     }
                 }
                 catch (Exception e)
@@ -212,6 +213,7 @@ namespace Server
                             Visible = item.Visible
                         };
                         db.Notes.Add(n);
+                        db.SaveChanges();
                     }
                 }
                 catch (Exception e)
@@ -233,6 +235,7 @@ namespace Server
                             Hours = (long)item.Hours    // this needs changed on the DB to support tenths of an hour
                         };
                         db.Labors.Add(l);
+                        db.SaveChanges();
                     }
                 }
                 catch (Exception e)
@@ -1003,22 +1006,30 @@ namespace Server
         {
             using (var db = new mainEntities())
             {
-                WorkOrder w = new WorkOrder
+                var check =
+                    from c in db.WorkOrders
+                    where c.AppointmentID == AppointmentID
+                    select c;
+                if (check.Count() == 0)
                 {
-                    AppointmentID = AppointmentID,
-                    Complete = 0,
-                    Id = db.WorkOrders.Count() + 1,
-                    TechnicianID = -1
-                };
-                db.WorkOrders.Add(w);
-                try
-                {
-                    db.SaveChanges();
+                    WorkOrder w = new WorkOrder
+                    {
+                        AppointmentID = AppointmentID,
+                        Complete = 0,
+                        Id = db.WorkOrders.Count() + 1,
+                        TechnicianID = -1
+                    };
+                    db.WorkOrders.Add(w);
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "ConvertToOrder", e.Message);
+                    }
                 }
-                catch (Exception e)
-                {
-                    ServerErrorLogger.GetInstance().WriteError(ERR_TYPES_SERVER.DATABASE_CONNECTION_ERROR, LOGGING_LEVEL.ERROR, "Database Failed to Update changes", "ConvertToOrder", e.Message);
-                }
+                
 
             }
         }
@@ -1194,6 +1205,33 @@ namespace Server
                 try
                 {
                     target.First().Status = text;
+                }
+                catch (Exception)
+                {
+
+                }
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+        }
+
+        public void UpdateDate(long id, string v)
+        {
+            using (var db = new mainEntities())
+            {
+                var target =
+                    from d in db.Dates
+                    where d.Id == id
+                    select d;
+                try
+                {
+                    target.First().Date1 = v;
                 }
                 catch (Exception)
                 {

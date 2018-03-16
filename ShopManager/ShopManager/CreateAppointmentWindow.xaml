@@ -12,6 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
@@ -23,7 +24,10 @@
             </Grid.ColumnDefinitions>
             <StackPanel Name="DateSelectorPanel" Grid.Column="1"/>
         </Grid>
-        <Grid Name="TopGrid" Grid.Row="1">
+        <Grid Name="HoursSelectorGrid" Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Name="HoursPanel"/>
+        </Grid>
+        <Grid Name="TopGrid" Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -43,7 +47,7 @@
             <Label Content="Car:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right"/>
             <Label Name="CarInfo" Content="" Grid.Column="1" Grid.Row="2"/>
         </Grid>
-        <Grid Name="MidGrid" Grid.Row="2">
+        <Grid Name="MidGrid" Grid.Row="3">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="9*"/>
@@ -56,7 +60,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Grid Name="BottomGrid" Grid.Row="3">
+        <Grid Name="BottomGrid" Grid.Row="4">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="9*"/>

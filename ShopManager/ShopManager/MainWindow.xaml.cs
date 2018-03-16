@@ -61,7 +61,7 @@ namespace ShopManager
             AppointmentList = new List<ShopManagerClasses.Appointment>();
             try
             {
-               AppointmentList =  AppServer.GetAppointments(CurrentWorkingDate);
+                AppointmentList = AppServer.GetAppointments(CurrentWorkingDate);
             }
             catch (Exception e)
             {
@@ -139,6 +139,19 @@ namespace ShopManager
         {
             Window win = new TechWindow(2);
             win.Show();
+        }
+
+        private void btnConvertToOrder_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                AppServer.ConvertToOrder(AppointmentList[IndexOfSelectedAppointment].Id);
+            }
+            catch (Exception)
+            {
+
+            }
+            btnSAView_Click(sender, e);
         }
     }
 }

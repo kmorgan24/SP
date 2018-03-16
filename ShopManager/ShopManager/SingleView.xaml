@@ -28,7 +28,8 @@
         <Label x:Name="labelMake" Content="Make: " Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label x:Name="labelModel" Content="Model: " Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label x:Name="labelHours" Content="Hours: " Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        
+        <Button Name="ChangeDatesBtn" Content="Change Date" Grid.Column="1" Grid.Row="4" Click="ChangeDatesBtn_Click"/>
+
         <ScrollViewer Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2">
             <StackPanel Name="ProblemDescriptions">
                 

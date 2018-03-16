@@ -15,7 +15,7 @@
             <RowDefinition Height="85*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            
+
         </Grid.ColumnDefinitions>
         <Grid>
             <Grid.RowDefinitions>
@@ -37,8 +37,8 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Menu x:Name="menu" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Height="100" Margin="0,0,0,0"  VerticalAlignment="Top" Width="Auto" MinWidth="150">
-                
-                
+
+
                 <MenuItem Header="Thing1">
                     Inner Thing
                 </MenuItem>
@@ -48,19 +48,19 @@
             <Button Name="btnWeekView" Content="Week" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnWeekView_Click"/>
 
             <Button Name="btnCreateNew" Content="New Appointment" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnCreateNew_Click"/>
-            <Button Name="btnConvertToOrder" Content="Convert to Order" Grid.Column="5" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Button Name="btnConvertToOrder" Content="Convert to Order" Grid.Column="5" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="65" Click="btnConvertToOrder_Click"/>
             <Button Name="btnOrdersView" Content="Orders" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnOrdersView_Click"/>
 
             <Button Name="btnSAView" Content="SA View" Grid.Column="7" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnSAView_Click"/>
             <Button Name="btnTechView" Content="Tech View" Grid.Column="8" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnTechView_Click"/>
 
             <Button Name="btnSettings" Content="Settings" Grid.Column="10" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="btnSettings_Click"/>
-            
-            
+
+
         </Grid>
         <Grid Name="BottomGrid" Grid.Row="1">
-            
+
         </Grid>
-        
+
     </Grid>
 </Window>

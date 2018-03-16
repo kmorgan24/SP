@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:ShopManager"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="100">
-    <Grid MouseDown="Grid_MouseDown" MinWidth="110">
+    <Grid MinWidth="110">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>

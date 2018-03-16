@@ -21,7 +21,8 @@ namespace ShopManager
     /// </summary>
     public partial class DateSelectorDisplay : UserControl
     {
-        private CreateAppointmentWindow _parent;
+        private Window _parent;
+        private Date currentDate;
         private DateTime _Date;
         private int MaxHours;
         private int CurrentHours;
@@ -34,6 +35,7 @@ namespace ShopManager
             _Date = day;
             MaxHours = Maxhours;
             CurrentHours = currentHours;
+            currentDate = null;
             HoursToShow = 0;
 
             DayLabel.Content = _Date.DayOfWeek;
@@ -53,7 +55,44 @@ namespace ShopManager
             {
                 HoursBar.Foreground = Brushes.Red;
             }
+            MouseDown += Grid_MouseDown;
         }
+        public DateSelectorDisplay(DateChangeWindow _par, Date day, DateTime targetDay, int Maxhours, int currentHours)
+        {
+            InitializeComponent();
+            _parent = _par;
+            _Date = targetDay;
+            currentDate = day;
+            MaxHours = Maxhours;
+            CurrentHours = currentHours;
+            HoursToShow = 0;
+
+            DayLabel.Content = _Date.DayOfWeek;
+            DateLabel.Content = _Date.Date;
+            HoursBar.Value = CurrentHours;
+            HoursBar.Maximum = MaxHours;
+            HoursLabel.Content = MaxHours - CurrentHours;
+            if (CurrentHours / MaxHours < .75)
+            {
+                HoursBar.Foreground = Brushes.Green;
+            }
+            else if ((CurrentHours + HoursToShow) / MaxHours < .99)
+            {
+                HoursBar.Foreground = Brushes.Yellow;
+            }
+            else
+            {
+                HoursBar.Foreground = Brushes.Red;
+            }
+            MouseDown += DateSelectorDisplay_MouseDown;
+        }
+
+        private void DateSelectorDisplay_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow.AppServer.UpdateDate(currentDate.Id, _Date.Date.ToString());
+            _parent.Close();
+        }
+
         public void ShowWithHours(int HoursToShow)
         {
             this.HoursToShow = HoursToShow;
@@ -78,11 +117,12 @@ namespace ShopManager
             Date d = new Date();
             d.Date1 = _Date.Date.ToString();
             d.Hours = HoursToShow;
-            
-            _parent._dates.Add(d);
+            (_parent as CreateAppointmentWindow)._hourstotal = HoursToShow;
+            (_parent as CreateAppointmentWindow)._dates.Add(d);
 
             //_parent._dates = _parent._dates.Distinct() as List<ShopManagerClasses.Date>;
             this.Background = Brushes.LightBlue;
+            (_parent as CreateAppointmentWindow).UpdateHoursSelector();
         }
     }
 }

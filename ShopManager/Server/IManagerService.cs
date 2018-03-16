@@ -91,7 +91,8 @@ namespace Server
 
         [OperationContract]
         void MarkOrderComplete(long idofSelected);
-
+        [OperationContract]
+        void UpdateDate(long id, string v);
         [OperationContract]
         void ConvertToOrder(long AppointmentID);
 

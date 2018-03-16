@@ -131,5 +131,15 @@ namespace ShopManager
                 Notes.Children.Add(temp);
             }
         }
+
+        private void ChangeDatesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in MainWindow.AppointmentList[MainWindow.IndexOfSelectedAppointment].Dates)
+            {
+                Window win = new DateChangeWindow(item);
+                win.ShowDialog();
+                
+            }
+        }
     }
 }

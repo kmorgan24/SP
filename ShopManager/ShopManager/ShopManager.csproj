@@ -108,6 +108,9 @@
     <Compile Include="CustomerResultDisplay.xaml.cs">
       <DependentUpon>CustomerResultDisplay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DateChangeWindow.xaml.cs">
+      <DependentUpon>DateChangeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DateSelectorDisplay.xaml.cs">
       <DependentUpon>DateSelectorDisplay.xaml</DependentUpon>
     </Compile>
@@ -183,6 +186,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CustomerResultDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DateChangeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
